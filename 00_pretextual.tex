@@ -1,0 +1,115 @@
+% ---
+% Inserir a ficha bibliografica
+% ---
+% A biblioteca da universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+
+\begin{fichacatalografica}
+    %\includepdf{fichacatalografica.pdf}
+\end{fichacatalografica}
+
+
+\newpage
+% ---
+% ---
+
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+% \includepdf{folhadeaprovacao_final.pdf}
+%
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    {\ABNTEXchapterfont\bfseries\Large\imprimirtitulo}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+ 
+
+    %\todo[inline]{Alterar o texto, talvez criar alguma macro condicional}
+    \begin{center}
+        \noindent
+        Trabalho de Conclusão de Curso apresentado ao Centro Universitário Serra dos Órgãos como requisito obrigatório para obtenção do título de Bacharel em Ciência da Computação.
+    \end{center}
+   % Caso prefira fixar a data, basta mudar o comando \today pela data,
+   %   como no exemplo abaixo:
+   %Trabalho aprovado. \imprimirlocal, 7 de setembro de 1822:
+
+    
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+   \assinatura{\textbf{Professor} \\ Nome Membro 1}     % título e nome
+   \assinatura{\textbf{Doutor} \\ Nome membro 2}        % título e nome
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+
+% ---------------------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------Dedicatória-
+% ---------------------------------------------------------------------------------------------
+\begin{dedicatoria}
+	\vspace*{\fill}
+        \flushright
+	% \centering
+	% \noindent
+	\textit{Dedico este trabalho ao meu falecido pai,\\
+    que sempre me apoiou.}
+\end{dedicatoria}
+
+% ---------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------Agradecimentos-
+% ---------------------------------------------------------------------------------------------
+\begin{agradecimentos}
+    Agradeço a Deus pela força e discernimento que me permitiram concluir esta etapa acadêmica. Agradeço a minha namorada por me acompanhar nessa jornada, sempre ao meu lado. Agradeço aos meus pais, que me apoiaram durante esta jornada acadêmica. Ao professor Victor de Almeida Thomaz, minha gratidão pela orientação e compartilhamento de conhecimentos essenciais para este trabalho.
+\end{agradecimentos}
+
+% ---------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------Epígrafe-
+% ---------------------------------------------------------------------------------------------
+\begin{epigrafe}
+	\vspace*{\fill}
+	\begin{flushright}
+	\textit{``Não vos amoldeis às estruturas deste mundo, \\
+			mas transformai-vos pela renovação da mente, \\
+			a fim de distinguir qual é a vontade de Deus: \\
+			o que é bom, o que Lhe é agradável, o que é perfeito.\\
+			(Bíblia Sagrada, Romanos 12, 2)} % Esse é um exemplo de epígrafe.
+	\end{flushright}
+\end{epigrafe}
+% ---
+
+% ---------------------------------------------------------------------------------------------
+% -------------------------------------------------------------------------resumo em português-
+% ---------------------------------------------------------------------------------------------
+\begin{resumo}
+	\input{src/resumo}
+\end{resumo}
+
+% ---------------------------------------------------------------------------------------------
+% ----------------------------------------------------------------------------resumo em inglês-
+% ---------------------------------------------------------------------------------------------
+\begin{resumo}[Abstract]
+	\input{src/abstract}
+\end{resumo}

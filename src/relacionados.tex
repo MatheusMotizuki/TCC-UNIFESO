@@ -1,0 +1,65 @@
+\chapter[Relacionados]{Trabalhos Relacionados}
+
+Na presente seção serão apresentados softwares de edição de imagem baseados em nodes (ou grafos). Serão analisados os principais
+aspectos desses programas, destacando como cada um implementa a modelagem de fluxo de edição, quais recursos são oferecidos aos 
+usuários e a praticidade de uso. O objetivo é identificar pontos fortes e limitações, de modo a fornecer uma base comparativa 
+para a proposta desenvolvida neste trabalho.
+
+\section{Gimel Studio}
+
+O Gimel Studio é um software de código aberto destinado à edição de imagens baseado em nodes. Desenvolvido na linguagem de 
+programação Dart e utilizando o framework Flutter para a construção da interface gráfica, o Gimel Studio apresenta similaridades
+visuais com editores tradicionais, como o Adobe Photoshop.
+
+Atualmente o Gimel Studio se encontra em estágio inicial de desenvolvimento. O repositório oficial fornece instruções detalhadas para
+a execução do projeto localmente. Até o presente momento, existe somente um lançamento de uma versão alpha, feita em Janeiro de 2022.
+Desde então, o desenvolvimento não apresenta atualizações significativas.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/gimelstudio.png}
+    \caption{Imagem do Gimel Studio}
+    \label{fig:gimelstudio}
+    \cite{gimelstudio}
+\end{figure}
+
+\section{Cresliant}
+
+O Cresliant é software de código aberto destinado à edição de imagens baseado em nodes. Desenvolvido na linguagem de programação Python,
+o Cresliant destaca-se por oferecer uma interface gráfia intuitiva e acessível ao usuário final, frequentemente referida como
+\textit{User-Friendly}. Entre tecnologias utilizadas em sua criação, destaca-se o uso do \textit{Poetry}, para o gerenciamento 
+eficiente de dependências e ambientes virtuais, bem como a biblioteca PILLOW (fork da Python Imaging Library - PIL), 
+que faz o papel crucial no processamento e manipulação de imagens do software.
+
+Apesar de o repositório do Cresliant, no Github, não apresentar atualizações recentes, sendo o último \textit{commit} registrado há
+aproximadamente dois anos, e a versão mais recente datada de dezembro de 2023, o software permanece funcional e estável, cumprindo 
+de maneira eficaz o propósito a que se destina.
+
+O Cresliant oferece, por padrão, poucos nodes/módulos de edição. No entanto, possibilita que o usuário crie novos nodes/módulos 
+e os adicione como submódulos/\textit{addons} externos, sem a necessidade de modificações diretas no código-fonte. Essa abordagem 
+promove uma certa liberdade ao usuário final, mas ao mesmo tempo limita a funcionalidade apenas àqueles que possuem conhecimento 
+técnico suficiente para realizar tal integração de novas funcionalidades.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/cresliant.png}
+    \caption{Imagem do Cresliant}
+    \label{fig:cresliant}
+    \cite{cresliant}
+\end{figure}
+
+\section{PixiEditor}
+
+O PixiEditor é software de código aberto destinado à criação de gráficos procedurais por meio de nodes. Desenvolvido na linguagem de programação
+Csharp, o PixiEditor destaca-se por sua robustez e ampla gama de funcionalidades. Além do editor de gráficos procedurais, o software
+oferece recursos adicionais, como criação de animações 2D, edição tradicional de imagens 2D, entre outras ferramentas, sendo ainda compatível com múltiplas plataformas.
+
+Atualmente o PixiEstudio encontra-se com o desenvolvimento ativo, com sua ultima versão lançada no dia 10 de setembro de 2025.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/pixi.png}
+    \caption{Imagem do Pixi Editor}
+    \label{fig:pixieditor}
+    \cite{pixieditor}
+\end{figure}

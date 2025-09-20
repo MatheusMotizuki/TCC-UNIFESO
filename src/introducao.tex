@@ -1,0 +1,70 @@
+\chapter[Introdução]{Introdução}
+
+% Introdução !!!!
+
+Os aplicativos de edição de imagens têm uma longa trajetória. Um dos marcos iniciais que viria a se tornar o Adobe Photoshop, criado pelos irmãos John e Thomas Knoll em 1987. Após um período de testes e pequenas distribuições sob o nome de Barneyscan XP, em 1989, o programa chamou a atenção da Adobe Systems, que fez um contrato de licenciamento com os irmãos Knoll. Assim, em 1990, foi lançado oficialmente o Adobe Photoshop 1.0, inicialmente para o sistema Macintosh \cite{BarneyScan}.
+
+Com o avanço das tecnologias de hardware e software, surgiram novos programas de edição de imagem, estabelecendo padrões que hoje são referências na indústria do design gráfico. Ferramentas como o próprio Photoshop, que desde a sua concepção vem se adaptando aos padrões de cada época, e o Gimp, (GNU Image Manipulation Program) tornaram-se amplamente reconhecidos \cite{PhotoEditors}.
+
+Ao longo do tempo, os softwares de edição de imagem buscaram tornar suas interfaces mais intuitivas e simplificadas, a fim de atingir um público mais amplo e não técnico. Essa tendência de design, proporcionou a criação de diversos aplicativos, dentro e fora da área de edição de imagens, mais simples e com um menor requerimento de expertise em uma área específica.
+
+Um conceito que se destacou durante esse processo foi o desenvolvimento de interfaces visuais, ou programação visual. Isso ocorre porque, de maneira geral, a compreensão de informações apresentadas graficamente tendem a ser mais intuitivas. Essa abordagem reforça a importância de interfaces gráficas bem planejadas, permitindo com que os usuários apliquem seus conhecimentos de forma mais prática, otimizando o fluxo de trabalho e a produtividade.
+
+A Programação de Fluxo de Dados (PFD), ou \textit{Dataflow Programming (DFP)}, é um paradigma de programação que modela a lógica de um programa como um grafo dirigido, de forma semelhante aos Diagramas de Fluxo de Dados (DFD). Nesse modelo, o programa é representado como um conjunto de nós, também conhecido como vértices (ou nós) interligados por conexões direcionadas, chamadas de arcos (ou bordas), que indicam o percurso dos dados entre as operações. Cada nó representa uma função ou operação específica \cite{dataflow-procedure, 48862}.
+
+A programação de fluxo de dados permite, por natureza, um alto grau de paralelismo. Diferentemente da arquitetura tradicional de von Neumann, onde as instruções são executadas em ordem e o controle de fluxo é centralizado, na PFD a execução ocorre de maneira assíncrona e descentralizada. Cada \textit{node} (nó) é executado assim que todos os dados necessários para sua operação estejam disponíveis. Esse modelo elimina a necessidade de um controle centralizado de fluxo, permitindo que múltiplas operações sejam realizadas simultaneamente, com melhor aproveitamento dos recucos computacionais disponíveis \cite{48862}.
+
+O alto paralelismo natural da PFD, faz com que, na área de edição de imagem, o fluxo de edição se torne descentralizado e não linear. Em programas tradicionais de edição de imagem, o usuário segue uma ordem linear de operações, fazendo com que cada mudança dependa da anterior. Com a implementação de um modelo Dataflow em um programa de edição de imagem, esse foco muda, e se torna descentralizado, permitindo que o usuário edite uma imagem de diversas maneiras, sem depender de uma sequência rígida.
+
+Programas desenvolvidos sob este paradigma são estruturados por meio de grupos de nodes (ou blocos), interligados por conexões que representam o fluxo de dados. Cada node possui portas de entrada e/ou saída, que pode exercer diferentes funções dentro do sistema, demonstrado na figura ~\ref{fig:dataflow} De forma geral, esses nós são classificados em três categorias principais, sendo elas: blocos de entrada, blocos de processamento e blocos de saída. As informações percorrem o programa seguindo essas conexões, introduzidos pelos blocos de entrada, sendo transformados conforme passam pelos blocos processadores, até atingirem os destinos finais nos blocos de saída, que coletam os resultados \cite{dataflow}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/dfpex.png}
+    \caption{
+    Um simples programa (a) e o seu equivalente em no formato Dataflow (b)}
+    \label{fig:dataflow}
+    \cite{dataflow}
+\end{figure}
+
+\section{Justificativa}
+
+Este trabalho propõe a criação de um aplicativo de edição de imagens baseado em grafos para a modelagem do fluxo da edição, tornando possível não apenas compreender e documentar o processo, mas também oferecer ao usuário final, que não possui o conhecimento técnico necessário para operar um aplicativo de edição mais avançado, meios mais intuitivos de modificar e experimentar sequências de transformações. Dessa forma, obtém-se uma solução de edição descentralizada, em que a criatividade é o único limite para a edição. Além disso, a adoção dessa metodologia pode servir como base para o desenvolvimento de aplicações que automatizem ou recomendem etapas de edição.
+
+\section{Motivação}
+
+A criação deste aplicativo origina-se principalmente na dificuldade de utilização de softwares profissionais, que, apesar de sua popularização, ainda apresentam uma barreira de entrada significativa para usuários não técnicos. Esses softwares tendem a não ser amigáveis para novos interessados na área, exigindo muitas vezes um verdadeiro “curso” para que se aprenda a utilizá-los, se tornando mais um requerimento do que apenas um complemento para usuários já familiarizados que querem elevar o nível de conhecimento.
+
+\section{Objetivos}
+
+Na presente seção serão expostos os objetivos do trabalho, tanto gerais como específicos. Objetivo geral consiste em um texto, de natureza extensa, com um detalhamento menos aprofundado, sobre as finalidades a serem atingidas com este projeto. 
+
+Objetivo específico é composto por tópicos, de média a curta extensão, de maior detalhamento, especificando finalidades a serem abrangidas pelo projeto. 
+
+\subsection{Objetivos Gerais}
+
+O objetivo principal deste projeto é a criação de um aplicativo de edição de foto baseado em nodes, com a sua principal finalidade sendo a implementação do diagrama de fluxo de dados, de uma forma visual, de forma que o usuário possa editar fotos e/ou imagens de uma forma disruptiva e não linear.
+
+Diferindo da tradicional forma de edição fotográfica sendo, uma forma linear de editar as imagens, com instruções uma após a outra, assim limitando o usuário a seguir um padrão ao invés de dar a liberdade para que o usuário possa, da forma que preferir, editar a imagem.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+    \item Implementar uma UI interativa e de fácil compreensão, que facilite a manipulação e configuração de componentes, sem a necessidade de grande um conhecimento técnico.
+    \item Implementar o paradigma de programação de fluxo de dados, permitindo que usuários construam pipelines de processamento de forma visual e modular.
+    \item Implementar criação de Shaders para edições de imagens e/ou criação de imagens dinâmicas.
+    \item Implementar \textit{nodes} funcionais capazes de realizar mudanças nas imagens, atendendo os parâmetros e requisitos definidos pelo usuário, independentemente da posição ou ordem no grafo.
+    \item Implementar nodes capazes de criar Shaders, tanto em versões de código, feitos pelo usuário, quanto nodes de código já previamente feitos pelo programa.
+\end{itemize}
+
+\section{Organização dos Capítulos}
+
+Na presente seção será apresentada a organização deste trabalho, divido em seções da seguinte forma:
+
+\begin{itemize}
+    \item Introdução
+    \item Fundamentação Teórica
+    \item Trabalhos Relacionados
+    \item Desenvolvimento
+    \item Conclusão
+\end{itemize}
