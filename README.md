@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="Group 22.png" alt="photoGraph logo">
+    <img src="logo.png" alt="photoGraph logo">
 </p>
 
 # informações
