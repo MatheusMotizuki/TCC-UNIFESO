@@ -6,11 +6,11 @@ Os aplicativos de edição de imagens têm uma longa trajetória. Um dos marcos 
 
 Com o avanço das tecnologias de hardware e software, surgiram novos programas de edição de imagem, estabelecendo padrões que hoje são referências na indústria do design gráfico. Ferramentas como o próprio Photoshop, que desde a sua concepção vem se adaptando aos padrões de cada época, e o Gimp, (GNU Image Manipulation Program) tornaram-se amplamente reconhecidos \cite{PhotoEditors}.
 
-Ao longo do tempo, os softwares de edição de imagem buscaram tornar suas interfaces mais intuitivas e simplificadas, a fim de atingir um público mais amplo e não técnico. Essa tendência de design, proporcionou a criação de diversos aplicativos, dentro e fora da área de edição de imagens, mais simples e com um menor requerimento de expertise em uma área específica.
+Ao longo do tempo, os softwares de edição de imagem buscaram tornar suas interfaces mais intuitivas e simplificadas, a fim de atingir um público mais amplo e não técnico. Essa tendência de design, proporcionou a criação de diversos aplicativos, dentro e fora da área de edição de imagens, mais simples e com um menor requerimento de expertise em uma determinada área.
 
 Um conceito que se destacou durante esse processo foi o desenvolvimento de interfaces visuais, ou programação visual. Isso ocorre porque, de maneira geral, a compreensão de informações apresentadas graficamente tendem a ser mais intuitivas. Essa abordagem reforça a importância de interfaces gráficas bem planejadas, permitindo com que os usuários apliquem seus conhecimentos de forma mais prática, otimizando o fluxo de trabalho e a produtividade.
 
-A Programação de Fluxo de Dados (PFD), ou \textit{Dataflow Programming (DFP)}, é um paradigma de programação que modela a lógica de um programa como um grafo dirigido, de forma semelhante aos Diagramas de Fluxo de Dados (DFD). Nesse modelo, o programa é representado como um conjunto de nós, também conhecido como vértices (ou nós) interligados por conexões direcionadas, chamadas de arcos (ou bordas), que indicam o percurso dos dados entre as operações. Cada nó representa uma função ou operação específica \cite{dataflow-procedure, 48862}.
+A Programação de Fluxo de Dados (PFD), ou \textit{Dataflow Programming (DFP)}, é um paradigma de programação que modela a lógica de um programa como um grafo dirigido, de forma semelhante aos Diagramas de Fluxo de Dados (DFD). Nesse modelo, o programa é representado como um conjunto de nós, também conhecido como vértices interligados por conexões direcionadas, chamadas de arcos (ou bordas), que indicam o percurso dos dados entre as operações. Cada nó representa uma função ou operação específica \cite{dataflow-procedure, 48862}.
 
 A programação de fluxo de dados permite, por natureza, um alto grau de paralelismo. Diferentemente da arquitetura tradicional de von Neumann, onde as instruções são executadas em ordem e o controle de fluxo é centralizado, na PFD a execução ocorre de maneira assíncrona e descentralizada. Cada \textit{node} (nó) é executado assim que todos os dados necessários para sua operação estejam disponíveis. Esse modelo elimina a necessidade de um controle centralizado de fluxo, permitindo que múltiplas operações sejam realizadas simultaneamente, com melhor aproveitamento dos recucos computacionais disponíveis \cite{48862}.
 
@@ -54,7 +54,8 @@ Diferindo da tradicional forma de edição fotográfica sendo, uma forma linear 
     \item Implementar o paradigma de programação de fluxo de dados, permitindo que usuários construam pipelines de processamento de forma visual e modular.
     \item Implementar criação de Shaders para edições de imagens e/ou criação de imagens dinâmicas.
     \item Implementar \textit{nodes} funcionais capazes de realizar mudanças nas imagens, atendendo os parâmetros e requisitos definidos pelo usuário, independentemente da posição ou ordem no grafo.
-    \item Implementar nodes capazes de criar Shaders, tanto em versões de código, feitos pelo usuário, quanto nodes de código já previamente feitos pelo programa.
+    \item Implementar \textit{nodes} capazes de criar Shaders, tanto em versões de código, feitos pelo usuário, quanto nodes de código já previamente feitos pelo programa.
+    \item Implementar um servidor websocket para sessões colaborativas, em que dois ou mais usuários possam editar a mesma imagem ao mesmo tempo.
 \end{itemize}
 
 \section{Organização dos Capítulos}

@@ -5,3 +5,10 @@
 *.gz
 *.toc
 *.pdf
+*.bbl
+*.brf
+*.blg
+*.fdb_latexmk
+*.fls
+*.ilg
+*.ind

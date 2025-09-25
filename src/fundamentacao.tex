@@ -6,7 +6,7 @@ Posteriormente, será abrangido o tema de processamento de imagens, em maior pro
 
 \section{Python}
 
-Python, uma linguagem de programação alto nível e propósito geral, amplamente reconhecida por sua simplicidade sintática, legibilidade e ampla comunidade de usuários. Sua praticidade e versatilidade tornam-no uma escolha popular em diversas áreas da computação, incluindo, mas não se limitando a, ciência de dados, automação desenvolvimento web e processamento de imagens \cite{Python}.
+Python, uma linguagem de programação alto nível e propósito geral, amplamente reconhecida por sua simplicidade sintática, legibilidade e ampla comunidade de usuários. Sua praticidade e versatilidade tornam-no uma escolha popular em diversas áreas da computação, incluindo, mas não se limitando a, ciência de dados, automação, desenvolvimento web e processamento de imagens \cite{Python}.
 
 Nesse contexto, o Python se destaca por oferecer um ecossistema robusto de bibliotecas especializadas, como OpenCV, NumPy, Scikit-image, Pillow, entre outras, que permitem desde simples operações de manipulação de imagem até o desenvolvimento de algorítimos avançados de análise, restauração e aperfeiçoamento visual.
 Essa ampla gama de recursos torna a linguagem uma ferramenta altamente eficaz para projetos que exigem processamento e tratamento de imagens digitais, como é o caso deste trabalho \cite{PillowDocs, PyOpenCV, NumPy, scikit-image}.
@@ -31,6 +31,8 @@ Entretanto, um dos problemas associados a esse modelo de interface é justamente
 
 No modo imediato, característico da biblioteca Dearpygui, exige que os elementos sejam desenhados a cada ciclo de atualização, ou a cada frame. Isso oferece alto controle e facilita a criação de interfaces altamente dinâmicas e responsivas, especialmente em tempo real \cite{retain-immediate}. Computadores mais fracos, em relação a CPU, acabam sofrendo com aplicações que utilizam esse modo de interface gráfica.
 
+% falar sobre criação de janelas
+
 \subsection{PILLOW}
 
 A biblioteca Pillow é uma continuação aprimorada e mantida até os dias atuais, originalmente desenvolvida sob o nome de PIL (Python Imaging Library) feita por Fredrik Lundh \cite{Pillow-Docs}, amplamente utilizada para processamento de imagens em Python. O pillow surgiu como uma fork do PIL, garantindo uma compatibilidade retroativa e adicionando suporte a recursos modernos, além da manutenção continua da comunidade \textit{open source}.
@@ -53,7 +55,7 @@ No contexto deste trabalho, a atenção à UI/UX foi uma das prioridades no proc
 
 \section{Dataflow}
 
-"Dataflow programming (DFP) é um paradigma de programação, onde a execução do programa é conceitualizada como dados fluindo por uma série de operações ou transformações" \cite{devopedia}. Diferente dos paradigmas tradicionais imperativos, onde o controle do fluxo é determinando pela sequência explícita de instruções, na PFD o foco está no fluxo dos dados e na maneira como eles propagam pelos nós (ou blocos funcionais) do sistema. Nesse modelo, cada operação ou nó executa seu processamento assim que todos os dados necessários para sua execução estão disponíveis, independentemente de uma ordem de execução global. Isso torna a PFD naturalmente concorrente e paralelizável, uma vez que operações independentes podem ser executadas simultaneamente sempre que seus dados estiverem disponíveis \cite{lee-parks}.
+"Dataflow programming (DFP) é um paradigma de programação, onde a execução do programa é conceitualizada como dados fluindo por uma série de operações ou transformações". Diferente dos paradigmas tradicionais imperativos, onde o controle do fluxo é determinando pela sequência explícita de instruções, na PFD o foco está no fluxo dos dados e na maneira como eles propagam pelos nós (ou blocos funcionais) do sistema. Nesse modelo, cada operação ou nó executa seu processamento assim que todos os dados necessários para sua execução estão disponíveis, independentemente de uma ordem de execução global. Isso torna a PFD naturalmente concorrente e paralelizável, uma vez que operações independentes podem ser executadas simultaneamente sempre que seus dados estiverem disponíveis \cite{lee-parks, devopedia}.
 
 Entre as principais características da PFD, destaca-se a execução orientada a dados. A execução de cada nó é acionada pela chegada de dados completos, dispensando o uso de estruturas tradicionais de controle de fluxo como por exemplo loops ou comandos condicionais. Ademais, como os nós são independentes, podem ser mapeados facilmente para diferentes threads ou até mesmo para processadores distintos, explorando ao máximo arquiteturas multicore e distribuídas \cite{ackerman.w.b}. O modelo PFD contribui para a tolerância a latências, pois em sistemas distribuídos ou heterogêneos diferentes nós podem prosseguir com o processando dados independentemente do tempo de processamento de outros nós. \cite{malteschwarzkopf}
 
