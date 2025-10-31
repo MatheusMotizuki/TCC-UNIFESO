@@ -2,20 +2,22 @@
 
 Na presente seção serão abordados tópicos específicos sobre programação e processamento de imagens que são fundamentais para a compreensão do presente trabalho. Inicialmente, será apresentado, de forma breve, os principais elementos que compõem a base do sistema desenvolvido, incluindo a linguagem escolhida para o desenvolvimento do aplicativo, bibliotecas, aspectos de UI/UX e sua importância para este projeto, bem como o paradigma de desenvolvimento adotado, sendo considerado um dos diferenciais do projeto.
 
-Posteriormente, será abrangido o tema de processamento de imagens, em maior profundidade,e suas aplicações neste trabalho, com ênfase nos conceitos práticos que embasam sua aplicação no projeto. Por fim, será discutido o processo de criação e utilização dos \textit{Shaders}, explicando seu funcionamento e importância.
+Posteriormente, será abordado o tema de processamento de imagens, em maior profundidade, e suas aplicações neste trabalho, com ênfase nos conceitos práticos que embasam sua aplicação no projeto. Por fim, será discutido o processo de criação e utilização dos \textit{Shaders}, explicando seu funcionamento e importância.
 
 \section{Python}
 
-Python, uma linguagem de programação alto nível e propósito geral, amplamente reconhecida por sua simplicidade sintática, legibilidade e ampla comunidade de usuários. Sua praticidade e versatilidade tornam-no uma escolha popular em diversas áreas da computação, incluindo, mas não se limitando a, ciência de dados, automação, desenvolvimento web e processamento de imagens \cite{Python}.
+Python, uma linguagem de programação de alto nível, propósito geral e interpretada, amplamente reconhecida por sua simplicidade sintática, legibilidade e ampla comunidade de usuários. Sua praticidade e versatilidade tornam-na uma escolha popular em diversas áreas da computação, incluindo, mas não se limitando a, ciência de dados, automação, desenvolvimento web e processamento de imagens \cite{Python}.
 
 Nesse contexto, o Python se destaca por oferecer um ecossistema robusto de bibliotecas especializadas, como OpenCV, NumPy, Scikit-image, Pillow, entre outras, que permitem desde simples operações de manipulação de imagem até o desenvolvimento de algorítimos avançados de análise, restauração e aperfeiçoamento visual.
 Essa ampla gama de recursos torna a linguagem uma ferramenta altamente eficaz para projetos que exigem processamento e tratamento de imagens digitais, como é o caso deste trabalho \cite{PillowDocs, PyOpenCV, NumPy, scikit-image}.
+
+Embora o Python possa ter um desempenho inferior quando comparado a linguagens compiladas como o C++, a vasta gama de bibliotecas otimizadas, muitas vezes escritas em C ou C++, permite que o Python alcance desempenhos comparáveis em tarefas específicas, como o processamento de imagens, graças à integração direta com a linguagem de programação C. Além disso, a facilidade de uso e a rapidez no desenvolvimento proporcionadas pela linguagem compensam eventuais perdas de performance, especialmente em protótipos e aplicações que não demandam processamento em tempo real \cite{pythonc}.
 
 \section{Bibliotecas}
 
 Bibliotecas, no sentido tradicional, são locais onde inúmeros livros são  armazenados para consulta, permitindo que os leitores adquiram conhecimento em diversas áreas e sobre os mais variados temas. As bibliotecas de programação seguem um conceito semelhante sendo elas, coleções de funções, rotinas ou módulos reutilizáveis, escritas em determinada linguagem de programação \cite{GeeksForGeeks}. E assim como livros, aonde releituras ou adaptações são constantemente criadas, as bibliotecas também passam por esse mesmo processo, dependendo da licença de uma biblioteca, ela pode ser reescrita em outra linguagem, ou adaptada como um binding ou wrapper, ou uma nova versão pode ser refeita, por uma pessoa diferente ou pelo criador original da mesma \cite{bind-wrap}.
 
-Nesta seção serão abordadas as bibliotecas utilizadas neste projeto, tanto de processamento de imagens como de interface de usuário.
+Nesta seção serão abordadas as bibliotecas utilizadas neste projeto, tanto de processamento de imagens como de interface de usuário. Descrevendo-as com detalhes, destacando suas principais características, vantagens e desvantagens.
 
 \subsection{Dear PyGui}
 
@@ -27,21 +29,23 @@ No modo retido (\textit{retained mode}), frameworks que utilizam esse estilo arm
 
 Um exemplo de tecnologia amplamente conhecida por utilizar esse método é o CSS (\textit{Cascading Style Sheets}), que mantém o estado de cada elemento em uma estrutura hierárquica e realiza a atualização somente do elemento que foi interagido ou afetado por alterações \cite{MDNdocs}.
 
-Entretanto, um dos problemas associados a esse modelo de interface é justamente o gerenciamento de estados. Em aplicações com muitos componentes, esse controle pode se tornar difícil de manter, gerando error que passam despercebidos. Por exemplo, ao deletar um componente e, inadvertidamente, tentar modificar o estado do mesmo, cuja referência ainda permaneça em algum ponto da hierarquia, isso acabaria causando em um erro, pois, o elemento modificado não estará mais presente na hierarquia.
+Entretanto, um dos problemas associados a esse modelo de interface é justamente o gerenciamento de estados. Em aplicações com muitos componentes, esse controle pode se tornar difícil de manter, gerando erros que passam despercebidos. Por exemplo, ao deletar um componente e tentar modificar o estado do mesmo, cuja referência ainda permaneça em algum ponto da hierarquia, isso acabaria causando em um erro, pois, o elemento modificado não estará mais presente.
 
 No modo imediato, característico da biblioteca Dearpygui, exige que os elementos sejam desenhados a cada ciclo de atualização, ou a cada frame. Isso oferece alto controle e facilita a criação de interfaces altamente dinâmicas e responsivas, especialmente em tempo real \cite{retain-immediate}. Computadores mais fracos, em relação a CPU, acabam sofrendo com aplicações que utilizam esse modo de interface gráfica.
-
-% falar sobre criação de janelas
 
 \subsection{PILLOW}
 
 A biblioteca Pillow é uma continuação aprimorada e mantida até os dias atuais, originalmente desenvolvida sob o nome de PIL (Python Imaging Library) feita por Fredrik Lundh \cite{Pillow-Docs}, amplamente utilizada para processamento de imagens em Python. O pillow surgiu como uma fork do PIL, garantindo uma compatibilidade retroativa e adicionando suporte a recursos modernos, além da manutenção continua da comunidade \textit{open source}.
 
-A biblioteca oferece uma ampla variedade de funcionalidades, como a abertura e a possibilidade de salvar imagens em diversos formatos como por exemplo, JPEG, PNG, BMP GIF e TIFF, além de suas outras funcionalidades como redimensionamento de imagens, corte, filtros alteração de cores entre outras \cite{PillowDocs}.
+A biblioteca oferece uma ampla variedade de funcionalidades simples, como a abertura e a possibilidade de salvar imagens em diversos formatos como por exemplo, JPEG, PNG, BMP GIF e TIFF, além de suas outras funcionalidades como redimensionamento de imagens, corte, filtros alteração de cores entre outras \cite{PillowDocs}.
 
-\subsection{PyOpenGL}
+Embora a biblioteca Pillow seja amplamente utilizada e reconhecida por sua facilidade de uso e integração com outras bibliotecas Python, ela apresenta algumas limitações, especialmente quando comparada a outras bibliotecas de processamento de imagens mais avançadas, como OpenCV. Por exemplo, o Pillow pode não ser tão eficiente em edição de grandes imagens ou operações complexas, devido a limitações impostas pela linguagem Python, que é interpretada e pode ser mais lenta em comparação com linguagens compiladas como C++.
 
-O PyOpenGL é um conjunto de bindings (ligações) em Python para a biblioteca gráfica OpenGL, permitindo que programas escritos em Python façam o uso direto dessa API de gráficos 2D e 3D. Por meio dela, é possível acessar praticamente todas as funcionalidades da API OpenGL, inclusive extensões modernas como shaders em GLSL. O PyOpenGL é multiplataforma, e é amplamente utilizado para o desenvolvimento de visualizações científicas, simulações e jogos \cite{PyOpenGl}.
+Devido a sua simplicidade, o Pillow é ideal para tarefas básicas de manipulação de imagens, já para aplicações que exigem um processamento mais intenso de imagens, bibliotecas como o OpenCV podem ser mais adequadas \cite{pilvsopencv}.
+
+\subsection{ModernGL}
+
+O ModernGL é uma biblioteca de Python que oferece uma interface simplificada para a API gráfica OpenGL, facilitando o desenvolvimento de aplicações gráficas 3D e 2D \cite{Dombi2020}. Ela abstrai muitos detalhes complexos do OpenGL tradicional, permitindo que desenvolvedores criem e manipulem objetos gráficos, buffers, texturas e shaders de forma mais direta e intuitiva.
 
 \section{Shaders}
 
@@ -57,7 +61,7 @@ No contexto deste trabalho, a atenção à UI/UX foi uma das prioridades no proc
 
 "Dataflow programming (DFP) é um paradigma de programação, onde a execução do programa é conceitualizada como dados fluindo por uma série de operações ou transformações". Diferente dos paradigmas tradicionais imperativos, onde o controle do fluxo é determinando pela sequência explícita de instruções, na PFD o foco está no fluxo dos dados e na maneira como eles propagam pelos nós (ou blocos funcionais) do sistema. Nesse modelo, cada operação ou nó executa seu processamento assim que todos os dados necessários para sua execução estão disponíveis, independentemente de uma ordem de execução global. Isso torna a PFD naturalmente concorrente e paralelizável, uma vez que operações independentes podem ser executadas simultaneamente sempre que seus dados estiverem disponíveis \cite{lee-parks, devopedia}.
 
-Entre as principais características da PFD, destaca-se a execução orientada a dados. A execução de cada nó é acionada pela chegada de dados completos, dispensando o uso de estruturas tradicionais de controle de fluxo como por exemplo loops ou comandos condicionais. Ademais, como os nós são independentes, podem ser mapeados facilmente para diferentes threads ou até mesmo para processadores distintos, explorando ao máximo arquiteturas multicore e distribuídas \cite{ackerman.w.b}. O modelo PFD contribui para a tolerância a latências, pois em sistemas distribuídos ou heterogêneos diferentes nós podem prosseguir com o processando dados independentemente do tempo de processamento de outros nós. \cite{malteschwarzkopf}
+Entre as principais características da PFD, destaca-se a execução orientada a dados. A execução de cada nó é acionada pela chegada de dados completos, dispensando o uso de estruturas tradicionais de controle de fluxo como por exemplo loops ou comandos condicionais. Ademais, como os nós são independentes, podem ser mapeados facilmente para diferentes threads ou até mesmo para processadores distintos, explorando ao máximo arquiteturas multicore e distribuídas \cite{ackerman.w.b}. O modelo PFD contribui para a tolerância a latências, pois em sistemas distribuídos ou heterogêneos diferentes nós podem prosseguir com o processando dados independentemente do tempo de processamento de outros nós \cite{malteschwarzkopf}.
 
 O Dataflow possui múltiplas implementações. Uma das implementações clássicas e mais simples é o modelo baseado em tokens, no qual os dados fluem pelos grafos na forma de tokens que transitam por filas do tipo FIFO (first in, first out) \cite{JohnstonHannaMillar, malteschwarzkopf}. Quando os dados necessários estão disponíveis nas entradas de um nó, ele é denominado de um nó \textit{fireable}, ou seja, o node está pronto para ser executado. Um nó \textit{fireable} será executado após um determinado intervalo de tempo desde o recebimento de seus dados. Passando esse período, ele é ativado, seus tokens de saída avançam para o próximo nó, o qual poderá então se tornar \textit{fireable}. O nó anterior, por sua vez, perde a denominação de \textit{fireable}, retorna ao seu estado padrão e aguarda até que o processo possa se repetir.
 

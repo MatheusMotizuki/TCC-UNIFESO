@@ -4,7 +4,7 @@
 
 Os aplicativos de edição de imagens têm uma longa trajetória. Um dos marcos iniciais que viria a se tornar o Adobe Photoshop, criado pelos irmãos John e Thomas Knoll em 1987. Após um período de testes e pequenas distribuições sob o nome de Barneyscan XP, em 1989, o programa chamou a atenção da Adobe Systems, que fez um contrato de licenciamento com os irmãos Knoll. Assim, em 1990, foi lançado oficialmente o Adobe Photoshop 1.0, inicialmente para o sistema Macintosh \cite{BarneyScan}.
 
-Com o avanço das tecnologias de hardware e software, surgiram novos programas de edição de imagem, estabelecendo padrões que hoje são referências na indústria do design gráfico. Ferramentas como o próprio Photoshop, que desde a sua concepção vem se adaptando aos padrões de cada época, e o Gimp, (GNU Image Manipulation Program) tornaram-se amplamente reconhecidos \cite{PhotoEditors}.
+Com o avanço das tecnologias de hardware e software, surgiram novos programas de edição de imagem, estabelecendo padrões que hoje são referências na indústria do design gráfico. Ferramentas como o próprio Photoshop, que desde a sua concepção vêm se adaptando aos padrões de cada época, e o Gimp (GNU Image Manipulation Program) tornaram-se amplamente reconhecidos \cite{PhotoEditors}.
 
 Ao longo do tempo, os softwares de edição de imagem buscaram tornar suas interfaces mais intuitivas e simplificadas, a fim de atingir um público mais amplo e não técnico. Essa tendência de design, proporcionou a criação de diversos aplicativos, dentro e fora da área de edição de imagens, mais simples e com um menor requerimento de expertise em uma determinada área.
 
@@ -14,7 +14,7 @@ A Programação de Fluxo de Dados (PFD), ou \textit{Dataflow Programming (DFP)},
 
 A programação de fluxo de dados permite, por natureza, um alto grau de paralelismo. Diferentemente da arquitetura tradicional de von Neumann, onde as instruções são executadas em ordem e o controle de fluxo é centralizado, na PFD a execução ocorre de maneira assíncrona e descentralizada. Cada \textit{node} (nó) é executado assim que todos os dados necessários para sua operação estejam disponíveis. Esse modelo elimina a necessidade de um controle centralizado de fluxo, permitindo que múltiplas operações sejam realizadas simultaneamente, com melhor aproveitamento dos recucos computacionais disponíveis \cite{48862}.
 
-O alto paralelismo natural da PFD, faz com que, na área de edição de imagem, o fluxo de edição se torne descentralizado e não linear. Em programas tradicionais de edição de imagem, o usuário segue uma ordem linear de operações, fazendo com que cada mudança dependa da anterior. Com a implementação de um modelo Dataflow em um programa de edição de imagem, esse foco muda, e se torna descentralizado, permitindo que o usuário edite uma imagem de diversas maneiras, sem depender de uma sequência rígida.
+O alto paralelismo natural da PFD faz com que, na área de edição de imagem, o fluxo de edição se torne descentralizado e não linear. Em programas tradicionais de edição de imagem, o usuário segue uma ordem linear de operações, fazendo com que cada mudança dependa da anterior. Com a implementação de um modelo Dataflow em um programa de edição de imagem, esse foco muda e se torna descentralizado, permitindo que o usuário edite uma imagem de diversas maneiras, sem depender de uma sequência rígida.
 
 Programas desenvolvidos sob este paradigma são estruturados por meio de grupos de nodes (ou blocos), interligados por conexões que representam o fluxo de dados. Cada node possui portas de entrada e/ou saída, que pode exercer diferentes funções dentro do sistema, demonstrado na figura ~\ref{fig:dataflow} De forma geral, esses nós são classificados em três categorias principais, sendo elas: blocos de entrada, blocos de processamento e blocos de saída. As informações percorrem o programa seguindo essas conexões, introduzidos pelos blocos de entrada, sendo transformados conforme passam pelos blocos processadores, até atingirem os destinos finais nos blocos de saída, que coletam os resultados \cite{dataflow}.
 
@@ -37,9 +37,7 @@ A criação deste aplicativo origina-se principalmente na dificuldade de utiliza
 
 \section{Objetivos}
 
-Na presente seção serão expostos os objetivos do trabalho, tanto gerais como específicos. Objetivo geral consiste em um texto, de natureza extensa, com um detalhamento menos aprofundado, sobre as finalidades a serem atingidas com este projeto. 
-
-Objetivo específico é composto por tópicos, de média a curta extensão, de maior detalhamento, especificando finalidades a serem abrangidas pelo projeto. 
+Na presente seção serão expostos os objetivos do trabalho, tanto gerais quanto específicos.
 
 \subsection{Objetivos Gerais}
 
@@ -60,12 +58,4 @@ Diferindo da tradicional forma de edição fotográfica sendo, uma forma linear 
 
 \section{Organização dos Capítulos}
 
-Na presente seção será apresentada a organização deste trabalho, divido em seções da seguinte forma:
-
-\begin{itemize}
-    \item Introdução
-    \item Fundamentação Teórica
-    \item Trabalhos Relacionados
-    \item Desenvolvimento
-    \item Conclusão
-\end{itemize}
+Na presente seção será apresentada a organização deste trabalho, divido em seções, iniciando pela introdução, seguida pela fundamentação teórica, trabalhos relacionados, desenvolvimento e conclusão do trabalho.
