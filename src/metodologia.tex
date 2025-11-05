@@ -1,4 +1,4 @@
-\chapter[Metodologia]{Metodologia}
+\chapter[Implementação do PhotoEditor]{Implementação do PhotoEditor}
 \renewcommand{\thelstlisting}{\arabic{lstlisting}}
 
 Na presente seção, será descrita a metodologia utilizada para a realização deste trabalho, separada por tópicos que englobam todo o processo de criação do projeto.
@@ -272,13 +272,6 @@ O fluxo de dados utiliza avaliação sob demanda (lazy evaluation), onde nós s�
 
 A imagem [\ref{fig:interface-nodes-fluxo-completo}] ilustra um fluxo completo do sistema, demonstrando a interconexão entre diferentes tipos de nós e o caminho que os dados percorrem desde a entrada até a saída final.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{imagens/fluxo_completo.jpg}
-    \caption{Fluxo completo do sistema}
-    \label{fig:interface-nodes-fluxo-completo}
-\end{figure}
-
 \subsection{Sistema de colaboração}
 
 A funcionalidade de colaboração em tempo real permite múltiplos usuários editarem o mesmo projeto simultaneamente. Mudanças são sincronizadas automaticamente entre todas as instâncias conectadas, utilizando um servidor WebSocket para comunicação eficiente.
@@ -308,7 +301,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 O servidor gerencia sessões de colaboração, autenticação de usuários e sincronização de estado entre clientes conectados. Implementa broadcasting eficiente de mudanças para todos os participantes de uma sessão.
 
-\subsubsection{Cliente}
+\subsection{Cliente}
 
 O cliente WebSocket integrado à aplicação principal estabelece conexões automáticas com o servidor e gerencia a sincronização de dados e o envio de dados ao servidor. O cliente implementa reconexão automática em caso de perda de conexão.
 
@@ -317,3 +310,14 @@ O sistema de polling integrado ao loop principal da aplicação garante um proce
 O envio de informações ao servidor é realizado sempre que uma modificação é feita localmente, garantindo que todas as mudanças sejam refletidas na sessão colaborativa, imediatamente após a ação do usuário.
 
 O cliente possui um sistema efetivo de gerenciamento de estado, garantindo que mudanças locais sejam refletidas corretamente no servidor e vice-versa. Implementa mecanismos de resolução de conflitos para lidar com edições simultâneas por múltiplos usuários, garantindo a integridade dos dados compartilhados.
+
+\section{Resultados}
+
+Na presente seção, serão apresentados os resultados obtidos a partir da implementação do sistema de edição de imagens baseado em nodes. Serão discutidos aspectos como performance, usabilidade e feedback dos usuários(maybe).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/fluxo_completo.jpg}
+    \caption{Fluxo completo do sistema}
+    \label{fig:interface-nodes-fluxo-completo}
+\end{figure}
