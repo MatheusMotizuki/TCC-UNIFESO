@@ -1,4 +1,4 @@
-\chapter[Relacionados]{Trabalhos Relacionados}
+\chapter[Trabalhos Relacionados]{Trabalhos Relacionados}
 
 Na presente seção serão apresentados softwares de edição de imagem baseados em nodes (ou grafos). Serão analisados os principais
 aspectos desses programas, destacando como cada um implementa a modelagem de fluxo de edição, quais recursos são oferecidos aos 
@@ -15,7 +15,11 @@ Atualmente o Gimel Studio se encontra em estágio inicial de desenvolvimento. O 
 a execução do projeto localmente. Até o presente momento, existe somente um lançamento de uma versão alpha, feita em Janeiro de 2022.
 Desde então, o desenvolvimento não apresenta atualizações significativas.
 
-\begin{figure}[ht]
+O Gimel Studio oferece um conjunto básico de nodes/módulos de edição, incluindo ajustes de brilho, contraste, saturação, desfoque e conversão para escala de cinza. A interface do usuário é intuitiva, permitindo a criação e conexão de nodes de forma visual. No entanto, o software não possui funcionalidades avançadas e uma comunidade pouco ativa, o que limita seu potencial de crescimento e adoção.
+
+Em comparação com o aplicativo proposto neste trabalho, o Gimel Studio apresenta uma interface mais tradicional, semelhante a editores de imagem convencionais, o que pode ser vantajoso para usuários acostumados a esse estilo. No entanto, o conjunto limitado de funcionalidades e a falta de suporte à colaboração em tempo real representam desvantagens significativas. O aplicativo desenvolvido neste trabalho busca oferecer uma experiência mais robusta e colaborativa, com uma gama maior de módulos de edição e uma interface mais refinada, visando atender a um público mais amplo, incluindo usuários sem conhecimento técnico avançado.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{imagens/gimelstudio.png}
     \caption{Imagem do Gimel Studio}
@@ -40,7 +44,9 @@ e os adicione como submódulos/\textit{addons} externos, sem a necessidade de mo
 promove uma certa liberdade ao usuário final, mas ao mesmo tempo limita a funcionalidade apenas àqueles que possuem conhecimento 
 técnico suficiente para realizar tal integração de novas funcionalidades.
 
-\begin{figure}[ht]
+O aplicativo Cresliant foca em fornecer uma experiência de edição de imagens baseada em nodes, priorizando a simplicidade e a facilidade de uso. Em comparação com o aplicativo proposto neste trabalho, o Cresliant apresenta uma interface mais básica e um conjunto limitado de funcionalidades nativas. O aplicativo desenvolvido neste trabalho busca oferecer uma experiência mais robusta, com uma gama maior de módulos de edição e uma interface mais refinada, visando atender a um público mais amplo, incluindo usuários sem conhecimento técnico avançado, além de oferecer uma funcionalidade única, sendo a colaboração em tempo real entre múltiplos usuários, o que não está presente no Cresliant.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{imagens/cresliant.png}
     \caption{Imagem do Cresliant}
@@ -56,10 +62,55 @@ oferece recursos adicionais, como criação de animações 2D, edição tradicio
 
 Atualmente o PixiEstudio encontra-se com o desenvolvimento ativo, com sua ultima versão lançada no dia 10 de setembro de 2025.
 
-\begin{figure}[ht]
+Em comparação com o aplicativo proposto neste trabalho, o PixiEditor oferece uma gama mais ampla de funcionalidades, indo além da edição de imagens baseada em nodes. A interface do PixiEditor é mais complexa, refletindo a diversidade de recursos oferecidos, o que pode representar um desafio para usuários iniciantes. Em contrapartida, o aplicativo proposto neste trabalho prioriza a simplicidade e a facilidade de uso, visando atender especialmente usuários sem conhecimento técnico avançado, e se concentra exclusivamente na edição de imagens por meio de nodes, proporcionando uma experiência mais direta e acessível.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{imagens/pixi.png}
     \caption{Imagem do Pixi Editor}
     \label{fig:pixieditor}
     \cite{pixieditor}
+\end{figure}
+
+
+\section{Photoshop}
+
+O Adobe Photoshop é um dos mais poderosos e populares editores de imagens e fotos do mundo, com diversas ferramentas para edição, criação e manipulação de imagens. 
+Desenvolvido pela Adobe, é amplamente utilizado por profissionais de design gráfico, fotografia, ilustração digital e outras áreas relacionadas.
+
+O Photoshop oferece uma ampla gama de recursos, incluindo ferramentas de seleção, camadas, máscaras, filtros, ajustes de cor, suporte a plugins, automação por scripts, 
+integração com outros softwares da Adobe (como Illustrator e After Effects), além de suporte a múltiplos formatos de arquivo.
+
+O Photoshop não é baseado em nodes, mas sim em uma interface tradicional de edição de imagens. 
+Apesar disso, é um software amplamente reconhecido e utilizado na indústria de design gráfico e edição de imagens, sendo referência em qualidade, flexibilidade e produtividade.
+
+O software é proprietário, com licença comercial, disponível para Windows e macOS. Possui uma comunidade global, extensa documentação, suporte técnico oficial e uma vasta gama de plugins e integrações. 
+O fluxo de trabalho é altamente profissional, com recursos avançados de automação e personalização, indicado para usuários avançados e profissionais.
+
+Em contraste com o aplicativo proposto neste trabalho, o Photoshop oferece uma gama muito mais ampla de funcionalidades e recursos avançados, atendendo a um público profissional. O aplicativo desenvolvido neste trabalho foca na simplicidade e acessibilidade, visando atender usuários sem conhecimento técnico avançado, com ênfase na edição de imagens por meio de nodes e colaboração em tempo real, características que não estão presentes no Photoshop.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/photoshop.jpg}
+    \caption{Imagem do Photoshop}
+    \label{fig:photoshop}
+    \cite{photoshop}
+\end{figure}
+
+
+\section{MS Paint}
+
+O MS Paint é um editor e criador de imagens e desenhos tradicional, integrado ao sistema operacional Windows desde suas primeiras versões. É um software simples, gratuito e voltado para tarefas básicas de edição e criação de imagens. 
+
+O MS Paint oferece ferramentas elementares como pincel, lápis, balde de tinta, formas geométricas, seleção e recorte, sendo indicado para usuários iniciantes ou para edições rápidas e descomplicadas.
+
+O MS Paint não possui suporte a nodes, plugins ou extensões, e sua interface é extremamente simples, sem recursos avançados de edição. Não há integração com outros softwares, mas sua facilidade de uso e disponibilidade o tornam uma ferramenta acessível para o público geral, sendo frequentemente utilizado para tarefas cotidianas, anotações rápidas e ilustrações simples.
+
+O MS Paint é uma simples ferramenta de edição de imagens, focada em tarefas básicas e acessibilidade. Em contraste, o aplicativo proposto neste trabalho oferece uma abordagem mais avançada e flexível para edição de imagens, utilizando nodes e permitindo colaboração em tempo real, características que não estão presentes no MS Paint. O aplicativo desenvolvido visa atender a um público mais amplo, incluindo usuários sem conhecimento técnico avançado, mas com necessidades de edição mais complexas do que aquelas atendidas pelo MS Paint.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/paint.jpg}
+    \caption{Imagem do MS Paint \\ (Fonte: autoria própria)}
+    \label{fig:mspaint}
 \end{figure}

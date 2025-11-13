@@ -4,16 +4,50 @@ Na presente seção serão abordados tópicos específicos sobre programação e
 
 Posteriormente, será abrangido o tema de processamento de imagens, em maior profundidade,e suas aplicações neste trabalho, com ênfase nos conceitos práticos que embasam sua aplicação no projeto. Por fim, será discutido o processo de criação e utilização dos \textit{Shaders}, explicando seu funcionamento e importância.
 
-\section{Python}
+\section{Linguagens}
+
+\subsection{C++}
+
+C++ é uma linguagem de programação de propósito geral, compilada e orientada a objetos, conhecida por sua extrema performance, desenvolvida por \textit{Bjarne Stroustrup} no início dos anos 1980 como uma extensão da linaguagem C. Ela foi projetada para oferecer recursos avançados de programação, como abstração de dados, encapsulamento, herança e polimorfismo, mantendo a eficiência e o desempenho característicos da linguagem C \cite{cpp}.
+
+A linguagem C++ é reconhecida por sua flexibilidade e controle sobre os recursos do sistema, permitindo que desenvolvedores criem aplicações robustas e eficientes, especialmente em áreas que requerem processamento intensivo, em \textit{softwares} embarcados, sistemas criticos e de alta performance onde o desempenho é crucial \cite{isocpp-uses}.
+
+O C++ também é utilizado em diversas áreas da computação, incluindo desenvolvimento de sistemas operacionais, jogos, aplicações de alta performance e software de engenharia, medicina entre outros \cite{stroustrup2013cpp}.
+
+Embora seja uma linguagem de alto desempenho, o C++ apresenta uma curva de aprendizado mais acentuada em comparação com linguagens de mais alto nível, como o Python \cite{cpp-vs-python}.
+
+\subsection{Golang}
+
+Golang, também conhecido como Go, é uma linguagem de programação de código aberto desenvolvida pelo Google em 2007 por \textit{Robert Griesemer, Rob Pike e Ken Thompson}. Projetada para ser simples, eficiente e altamente performática, o Go combina a facilidade de uso de linguagens de alto nível com a eficiência e controle típicos de linguagens de baixo nível \cite{golang}.
+
+O Golang é amplamente utilizado em desenvolvimento de sistemas, aplicações web, serviços em nuvem e ferramentas de linha de comando, graças à sua capacidade de lidar com concorrência de forma nativa através de \textit{goroutines} e canais. Sua sintaxe clara e concisa facilita a leitura e manutenção do código, tornando-o uma escolha popular entre desenvolvedores que buscam produtividade sem sacrificar o desempenho \cite{golang-concurrency}.
+
+\subsection{Javascript}
+
+O JavaScript é uma linguagem de programação de alto nível, interpretada e orientada a objetos, amplamente utilizada no desenvolvimento web para a criação de páginas e aplicações interativas. Originalmente desenvolvido por \textit{Brendan Eich} em 1995, o JavaScript evoluiu significativamente ao longo dos anos, tornando-se uma das linguagens mais populares e versáteis do mundo da programação \cite{javascript}.
+
+\subsection{Python}
 
 Python, uma linguagem de programação alto nível e propósito geral, amplamente reconhecida por sua simplicidade sintática, legibilidade e ampla comunidade de usuários. Sua praticidade e versatilidade tornam-no uma escolha popular em diversas áreas da computação, incluindo, mas não se limitando a, ciência de dados, automação desenvolvimento web e processamento de imagens \cite{Python}.
 
 Nesse contexto, o Python se destaca por oferecer um ecossistema robusto de bibliotecas especializadas, como OpenCV, NumPy, Scikit-image, Pillow, entre outras, que permitem desde simples operações de manipulação de imagem até o desenvolvimento de algorítimos avançados de análise, restauração e aperfeiçoamento visual.
 Essa ampla gama de recursos torna a linguagem uma ferramenta altamente eficaz para projetos que exigem processamento e tratamento de imagens digitais, como é o caso deste trabalho \cite{PillowDocs, PyOpenCV, NumPy, scikit-image}.
 
+Embora o Python possa ter um desempenho inferior quando comparado a linguagens compiladas como o C++, a vasta gama de bibliotecas otimizadas, muitas vezes escritas em C ou C++, permite que o Python alcance desempenhos comparáveis em tarefas específicas, como o processamento de imagens, graças à integração direta com a linguagem de programação C. Além disso, a facilidade de uso e a rapidez no desenvolvimento proporcionadas pela linguagem compensam eventuais perdas de performance, especialmente em protótipos e aplicações que não demandam processamento em tempo real \cite{pythonc}.
+
+\section{WASM}
+
+O WASM (WebAssembly) é um formato de código binário de baixo nível projetado para ser executado em navegadores web e outros ambientes que suportam a execução de código nativo. Desenvolvido para complementar o JavaScript, o WebAssembly permite que linguagens de programação como C, C++ e Rust sejam compiladas para um formato eficiente e portátil, possibilitando a execução de aplicações de alta performance diretamente no navegador \cite{wasm}.
+
+O WebAssembly é uma tecnologia que visa melhorar o desempenho de aplicações web, permitindo que código de baixo nível seja executado de forma mais rápida e eficiente do que o JavaScript. Ele é especialmente útil para aplicações que exigem processamento intensivo, como jogos, editores de imagem e outras ferramentas criativas \cite{wasm-goals}.
+
+\subsection{emscripten}
+
+O Emscripten é um compilador de código aberto que converte código escrito em linguagens como C e C++ para WebAssembly (WASM) ou JavaScript, permitindo que aplicações originalmente desenvolvidas para ambientes nativos sejam executadas em navegadores web. Desenvolvido por \textit{Alon Zakai}, o Emscripten utiliza o LLVM (Low Level Virtual Machine) como backend para realizar a compilação, garantindo eficiência e compatibilidade com uma ampla gama de códigos \cite{emscripten}.
+
 \section{Bibliotecas}
 
-Bibliotecas, no sentido tradicional, são locais onde inúmeros livros são  armazenados para consulta, permitindo que os leitores adquiram conhecimento em diversas áreas e sobre os mais variados temas. As bibliotecas de programação seguem um conceito semelhante sendo elas, coleções de funções, rotinas ou módulos reutilizáveis, escritas em determinada linguagem de programação \cite{GeeksForGeeks}. E assim como livros, aonde releituras ou adaptações são constantemente criadas, as bibliotecas também passam por esse mesmo processo, dependendo da licença de uma biblioteca, ela pode ser reescrita em outra linguagem, ou adaptada como um binding ou wrapper, ou uma nova versão pode ser refeita, por uma pessoa diferente ou pelo criador original da mesma \cite{bind-wrap}.
+Bibliotecas, no sentido tradicional, são locais onde inúmeros livros são  armazenados para consulta, permitindo que os leitores adquiram conhecimento em diversas áreas e sobre os mais variados temas. As bibliotecas de programação seguem um conceito semelhante sendo elas, coleções de funções, rotinas ou módulos reutilizáveis, escritas em determinada linguagem de programação \cite{CarrerFoundry}. E assim como livros, aonde releituras ou adaptações são constantemente criadas, as bibliotecas também passam por esse mesmo processo, dependendo da licença de uma biblioteca, ela pode ser reescrita em outra linguagem, ou adaptada como um binding ou wrapper, ou uma nova versão pode ser refeita, por uma pessoa diferente ou pelo criador original da mesma \cite{bind-wrap}.
 
 Nesta seção serão abordadas as bibliotecas utilizadas neste projeto, tanto de processamento de imagens como de interface de usuário.
 
@@ -31,15 +65,31 @@ Entretanto, um dos problemas associados a esse modelo de interface é justamente
 
 No modo imediato, característico da biblioteca Dearpygui, exige que os elementos sejam desenhados a cada ciclo de atualização, ou a cada frame. Isso oferece alto controle e facilita a criação de interfaces altamente dinâmicas e responsivas, especialmente em tempo real \cite{retain-immediate}. Computadores mais fracos, em relação a CPU, acabam sofrendo com aplicações que utilizam esse modo de interface gráfica.
 
+\subsubsection{ImNodes}
+
+O \textit{ImNodes} é uma biblioteca complementar ao \textit{Dear ImGui}, que fornece funcionalidades específicas para a criação de interfaces gráficas baseadas em grafos de nós (\textit{node-based interfaces}). Desenvolvida para facilitar a construção de sistemas visuais onde os usuários podem criar, conectar e manipular nós de forma intuitiva, o \textit{ImNodes} é amplamente utilizado em aplicações como editores de shaders, ferramentas de composição visual e sistemas de fluxo de dados \cite{ImNodes}.
+
 \subsection{PILLOW}
 
 A biblioteca Pillow é uma continuação aprimorada e mantida até os dias atuais, originalmente desenvolvida sob o nome de PIL (Python Imaging Library) feita por Fredrik Lundh \cite{Pillow-Docs}, amplamente utilizada para processamento de imagens em Python. O pillow surgiu como uma fork do PIL, garantindo uma compatibilidade retroativa e adicionando suporte a recursos modernos, além da manutenção continua da comunidade \textit{open source}.
 
 A biblioteca oferece uma ampla variedade de funcionalidades, como a abertura e a possibilidade de salvar imagens em diversos formatos como por exemplo, JPEG, PNG, BMP GIF e TIFF, além de suas outras funcionalidades como redimensionamento de imagens, corte, filtros alteração de cores entre outras \cite{PillowDocs}.
 
-\subsection{PyOpenGL}
+Embora a biblioteca Pillow seja amplamente utilizada e reconhecida por sua facilidade de uso e integração com outras bibliotecas Python, ela apresenta algumas limitações, especialmente quando comparada a outras bibliotecas de processamento de imagens mais avançadas, como OpenCV. Por exemplo, o Pillow pode não ser tão eficiente em edição de grandes imagens ou operações complexas, devido a limitações impostas pela linguagem Python, que é interpretada e pode ser mais lenta em comparação com linguagens compiladas como C++.
 
-O PyOpenGL é um conjunto de bindings (ligações) em Python para a biblioteca gráfica OpenGL, permitindo que programas escritos em Python façam o uso direto dessa API de gráficos 2D e 3D. Por meio dela, é possível acessar praticamente todas as funcionalidades da API OpenGL, inclusive extensões modernas como shaders em GLSL. O PyOpenGL é multiplataforma, e é amplamente utilizado para o desenvolvimento de visualizações científicas, simulações e jogos \cite{PyOpenGl}.
+Devido a sua simplicidade, o Pillow é ideal para tarefas básicas de manipulação de imagens, já para aplicações que exigem um processamento mais intenso de imagens, bibliotecas como o OpenCV podem ser mais adequadas \cite{pilvsopencv}.
+
+\subsection{ModernGL}
+
+O \textit{ModernGL} é uma biblioteca de Python que oferece uma interface simplificada para a API gráfica OpenGL, facilitando o desenvolvimento de aplicações gráficas 3D e 2D \cite{Dombi2020}. Ela abstrai muitos detalhes complexos do OpenGL tradicional, permitindo que desenvolvedores criem e manipulem objetos gráficos, buffers, texturas e shaders de forma mais direta e intuitiva.
+
+\subsection{OpenCV}
+
+O \textit{OpenCV} é uma poderosa biblioteca de manipulação e processamento de imagens e vídeos, amplamente utilizada em diversas áreas, como visão computacional, aprendizado de máquina, robótica e análise de imagens médicas. Desenvolvida inicialmente pela Intel em 1999, a biblioteca tem o seu código aberto e possui uma vasta gama de funcionalidades que facilitam o desenvolvimento de aplicações que envolvem processamento de imagens \cite{OpenCV}.
+
+\subsection{SDL}
+
+O SDL (Simple DirectMedia Layer) é uma biblioteca de desenvolvimento multimídia de código aberto multiplataforma que é amplamente utilizada a criação de aplicações que envolvem gráficos, áudio e entrada de dispositivos. Desenvolvida inicialmente por \textit{Sam Lantinga} em 1998, o SDL é projetado para fornecer uma camada de abstração sobre as APIs específicas do sistema operacional, facilitando o desenvolvimento de software portátil e eficiente \cite{SDL}.
 
 \section{Shaders}
 
