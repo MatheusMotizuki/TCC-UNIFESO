@@ -1,19 +1,12 @@
 \chapter[Trabalhos Relacionados]{Trabalhos Relacionados}
 
-Na presente seção serão apresentados softwares de edição de imagem baseados em nodes (ou grafos). Serão analisados os principais
-aspectos desses programas, destacando como cada um implementa a modelagem de fluxo de edição, quais recursos são oferecidos aos 
-usuários e a praticidade de uso. O objetivo é identificar pontos fortes e limitações, de modo a fornecer uma base comparativa 
-para a proposta desenvolvida neste trabalho.
+Na presente seção serão apresentados softwares de edição de imagem baseados em nodes (ou grafos). Serão analisados os principais aspectos desses programas, destacando como cada um implementa a modelagem de fluxo de edição, quais recursos são oferecidos aos usuários e a praticidade de uso. O objetivo é identificar pontos fortes e limitações, de modo a fornecer uma base comparativa para a proposta desenvolvida neste trabalho.
 
 \section{Gimel Studio}
 
-O Gimel Studio é um software de código aberto destinado à edição de imagens baseado em nodes. Desenvolvido na linguagem de 
-programação Dart e utilizando o framework Flutter para a construção da interface gráfica, o Gimel Studio apresenta similaridades
-visuais com editores tradicionais, como o Adobe Photoshop.
+O Gimel Studio é um software de código aberto destinado à edição de imagens baseado em nodes. Desenvolvido na linguagem de programação Dart e utilizando o framework Flutter para a construção da interface gráfica, o Gimel Studio apresenta similaridades visuais com editores tradicionais, como o Adobe Photoshop. A Figura~[\ref{fig:gimelstudio}] apresenta a interface do Gimel Studio, que é caracterizada por sua semelhança com editores convencionais, facilitando a adaptação de usuários familiarizados com esse estilo de interface.
 
-Atualmente o Gimel Studio se encontra em estágio inicial de desenvolvimento. O repositório oficial fornece instruções detalhadas para
-a execução do projeto localmente. Até o presente momento, existe somente um lançamento de uma versão alpha, feita em Janeiro de 2022.
-Desde então, o desenvolvimento não apresenta atualizações significativas.
+Atualmente o Gimel Studio se encontra em estágio inicial de desenvolvimento. O repositório oficial fornece instruções detalhadas para a execução do projeto localmente. Até o presente momento, existe somente um lançamento de uma versão alpha, feita em Janeiro de 2022. Desde então, o desenvolvimento não apresenta atualizações significativas.
 
 O Gimel Studio oferece um conjunto básico de nodes/módulos de edição, incluindo ajustes de brilho, contraste, saturação, desfoque e conversão para escala de cinza. A interface do usuário é intuitiva, permitindo a criação e conexão de nodes de forma visual. No entanto, o software não possui funcionalidades avançadas e uma comunidade pouco ativa, o que limita seu potencial de crescimento e adoção.
 
@@ -27,21 +20,14 @@ Em comparação com o aplicativo proposto neste trabalho, o Gimel Studio apresen
     \cite{gimelstudio}
 \end{figure}
 
+
 \section{Cresliant}
 
-O Cresliant é software de código aberto destinado à edição de imagens baseado em nodes. Desenvolvido na linguagem de programação Python,
-o Cresliant destaca-se por oferecer uma interface gráfia intuitiva e acessível ao usuário final, frequentemente referida como
-\textit{User-Friendly}. Entre tecnologias utilizadas em sua criação, destaca-se o uso do \textit{Poetry}, para o gerenciamento 
-eficiente de dependências e ambientes virtuais, bem como a biblioteca PILLOW (fork da Python Imaging Library - PIL), 
-que faz o papel crucial no processamento e manipulação de imagens do software.
+O Cresliant é um software de código aberto destinado à edição de imagens baseado em nodes. Desenvolvido na linguagem de programação Python, o Cresliant destaca-se por oferecer uma interface gráfica intuitiva e acessível ao usuário final, frequentemente referida como \textit{User-Friendly}. Entre as tecnologias utilizadas em sua criação, destaca-se o uso do \textit{Poetry}, para o gerenciamento eficiente de dependências e ambientes virtuais, bem como a biblioteca PILLOW (fork da Python Imaging Library - PIL), que desempenha papel crucial no processamento e manipulação de imagens do software. A Figura~[\ref{fig:cresliant}] apresenta a interface do Cresliant, que é caracterizada por sua simplicidade e facilidade de uso.
 
-Apesar de o repositório do Cresliant, no Github, não apresentar atualizações recentes, sendo o último \textit{commit} registrado há
-aproximadamente dois anos, e a versão mais recente datada de dezembro de 2023, o software permanece funcional e estável, cumprindo 
-de maneira eficaz o propósito a que se destina.
+Apesar de o repositório do Cresliant, no Github, não apresentar atualizações recentes, sendo o último \textit{commit} registrado há aproximadamente dois anos, e a versão mais recente datada de dezembro de 2023, o software permanece funcional e estável, cumprindo de maneira eficaz o propósito a que se destina.
 
-O Cresliant oferece, por padrão, poucos nodes/módulos de edição. No entanto, possibilita que o usuário crie novos nodes/módulos 
-e os adicione como submódulos/\textit{addons} externos, sem a necessidade de modificações diretas no código-fonte. Essa abordagem 
-promove uma certa liberdade ao usuário final, mas ao mesmo tempo limita a funcionalidade apenas àqueles que possuem conhecimento 
+O Cresliant oferece, por padrão, poucos nodes/módulos de edição. No entanto, possibilita que o usuário crie novos nodes/módulos e os adicione como submódulos/\textit{addons} externos, sem a necessidade de modificações diretas no código-fonte. Essa abordagem promove uma certa liberdade ao usuário final, mas ao mesmo tempo limita a funcionalidade apenas àqueles que possuem conhecimento 
 técnico suficiente para realizar tal integração de novas funcionalidades.
 
 O aplicativo Cresliant foca em fornecer uma experiência de edição de imagens baseada em nodes, priorizando a simplicidade e a facilidade de uso. Em comparação com o aplicativo proposto neste trabalho, o Cresliant apresenta uma interface mais básica e um conjunto limitado de funcionalidades nativas. O aplicativo desenvolvido neste trabalho busca oferecer uma experiência mais robusta, com uma gama maior de módulos de edição e uma interface mais refinada, visando atender a um público mais amplo, incluindo usuários sem conhecimento técnico avançado, além de oferecer uma funcionalidade única, sendo a colaboração em tempo real entre múltiplos usuários, o que não está presente no Cresliant.
@@ -54,13 +40,12 @@ O aplicativo Cresliant foca em fornecer uma experiência de edição de imagens 
     \cite{cresliant}
 \end{figure}
 
+
 \section{PixiEditor}
 
-O PixiEditor é software de código aberto destinado à criação de gráficos procedurais por meio de nodes. Desenvolvido na linguagem de programação
-Csharp, o PixiEditor destaca-se por sua robustez e ampla gama de funcionalidades. Além do editor de gráficos procedurais, o software
-oferece recursos adicionais, como criação de animações 2D, edição tradicional de imagens 2D, entre outras ferramentas, sendo ainda compatível com múltiplas plataformas.
+O PixiEditor é software de código aberto destinado à criação de gráficos procedurais por meio de nodes. Desenvolvido na linguagem de programação Csharp, o PixiEditor destaca-se por sua robustez e ampla gama de funcionalidades. Além do editor de gráficos procedurais, o software oferece recursos adicionais, como criação de animações 2D, edição tradicional de imagens 2D, entre outras ferramentas, sendo ainda compatível com múltiplas plataformas. A Figura~[\ref{fig:pixieditor}] apresenta a interface do PixiEditor, que é caracterizada por sua complexidade e riqueza de recursos.
 
-Atualmente o PixiEstudio encontra-se com o desenvolvimento ativo, com sua ultima versão lançada no dia 10 de setembro de 2025.
+Atualmente o PixiEditor encontra-se com o desenvolvimento ativo, com sua ultima versão lançada no dia 10 de setembro de 2025. Com sua vasta gama de funcionalidades, o PixiEditor se apresenta como uma alternativa viável para profissionais e entusiastas que buscam uma solução completa para criação e edição gráfica.
 
 Em comparação com o aplicativo proposto neste trabalho, o PixiEditor oferece uma gama mais ampla de funcionalidades, indo além da edição de imagens baseada em nodes. A interface do PixiEditor é mais complexa, refletindo a diversidade de recursos oferecidos, o que pode representar um desafio para usuários iniciantes. Em contrapartida, o aplicativo proposto neste trabalho prioriza a simplicidade e a facilidade de uso, visando atender especialmente usuários sem conhecimento técnico avançado, e se concentra exclusivamente na edição de imagens por meio de nodes, proporcionando uma experiência mais direta e acessível.
 
@@ -76,7 +61,7 @@ Em comparação com o aplicativo proposto neste trabalho, o PixiEditor oferece u
 \section{Photoshop}
 
 O Adobe Photoshop é um dos mais poderosos e populares editores de imagens e fotos do mundo, com diversas ferramentas para edição, criação e manipulação de imagens. 
-Desenvolvido pela Adobe, é amplamente utilizado por profissionais de design gráfico, fotografia, ilustração digital e outras áreas relacionadas.
+Desenvolvido pela Adobe, é amplamente utilizado por profissionais de design gráfico, fotografia, ilustração digital e outras áreas relacionadas. A Figura~[\ref{fig:photoshop}] apresenta a interface do Photoshop, que é caracterizada por sua complexidade e riqueza de recursos.
 
 O Photoshop oferece uma ampla gama de recursos, incluindo ferramentas de seleção, camadas, máscaras, filtros, ajustes de cor, suporte a plugins, automação por scripts, 
 integração com outros softwares da Adobe (como Illustrator e After Effects), além de suporte a múltiplos formatos de arquivo.
@@ -100,7 +85,7 @@ Em contraste com o aplicativo proposto neste trabalho, o Photoshop oferece uma g
 
 \section{MS Paint}
 
-O MS Paint é um editor e criador de imagens e desenhos tradicional, integrado ao sistema operacional Windows desde suas primeiras versões. É um software simples, gratuito e voltado para tarefas básicas de edição e criação de imagens. 
+O MS Paint é um editor e criador de imagens e desenhos tradicional, integrado ao sistema operacional Windows desde suas primeiras versões. É um software simples, gratuito e voltado para tarefas básicas de edição e criação de imagens. A Figura~[\ref{fig:mspaint}] apresenta a interface do MS Paint, que é caracterizada por sua simplicidade e facilidade de uso.
 
 O MS Paint oferece ferramentas elementares como pincel, lápis, balde de tinta, formas geométricas, seleção e recorte, sendo indicado para usuários iniciantes ou para edições rápidas e descomplicadas.
 
@@ -114,3 +99,36 @@ O MS Paint é uma simples ferramenta de edição de imagens, focada em tarefas b
     \caption{Imagem do MS Paint \\ (Fonte: autoria própria)}
     \label{fig:mspaint}
 \end{figure}
+
+
+\section{Comparativo}
+
+A Tabela [\ref{tab:comparativo}] apresenta um comparativo entre os softwares analisados nesta seção, destacando suas principais características, funcionalidades e limitações.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \textbf{Software} & \textbf{Baseado em Nodes} & \textbf{Funcionalidades} & \textbf{Web} & \textbf{Colaboração} \\
+        \hline
+        Gimel
+        Studio & Sim & Básico & Não & Não \\
+        \hline
+        Cresliant & Sim & Básico & Não & Não \\
+        \hline
+        Pixi
+        Editor & Sim & Avançado & Não & Não \\
+        \hline
+        Adobe
+        Photoshop & Não & Muito Avançado & Não & Não \\
+        \hline
+        MS
+        Paint & Não & Muito Básico & Não & Não\\
+        \hline
+        Aplicativo
+        Proposto & Sim & Básico & Sim & Sim \\
+        \hline
+    \end{tabular}
+    \caption{Comparativo entre softwares de edição de imagem}
+    \label{tab:comparativo}
+\end{table}

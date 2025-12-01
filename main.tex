@@ -76,7 +76,25 @@
 \usepackage{lipsum}             % Pacote para Lorem Ipsum.
 \usepackage{float}              % Pacote para posicionamento de elementos, e.g. Tabelas, figuras, equações, etc.
 % ---
-		
+\usepackage{tcolorbox}
+\tcbuselibrary{listings,skins,breakable}
+
+
+\newtcolorbox{InvisibleCodeBox}{
+    breakable=false,
+    enhanced,
+    colback=white,      % background = full white (blend with page)
+    colframe=white,     % border = white (invisible)
+    boxrule=0pt,        % no border line
+    arc=0mm,            % square corners (no visible edges)
+    left=0mm,           % no padding on left
+    right=0mm,          % no padding on right
+    top=0mm,
+    bottom=0mm,
+    enlarge top by=0mm,
+    enlarge bottom by=0mm,
+    boxsep=0pt,         % zero spacing
+}
 
 \usepackage{float}
 \usepackage{subfig}
@@ -86,7 +104,7 @@
 % Pacotes de citações
 % ---
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\usepackage[num]{abntex2cite}	% Citações padrão ABNT
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
 
 %-------------------
 %COMANDO PARA NOTAS DE RODAPE
@@ -121,11 +139,11 @@
 % ---------------------------------------------------------------------------------------------
 % ---------------------------------------------Informações de dados para CAPA e FOLHA DE ROSTO-
 % ---------------------------------------------------------------------------------------------
-\titulo{photoGraph: Modelagem de Fluxos de Edição \\ Fotográfica Através de Estruturas de Grafos}
+\titulo{PhotoGraph: Uma Aplicação para Edição de Imagens Baseada em Nodes}
 \autor{Matheus da Silva Correa Motizuki}
 \local{Teresópolis}
 \data{\the\year}
-\orientador{Victor de Almeida Thomaz}
+\orientador{Victor de Almeida Thomaz D.Sc.}
 %\coorientador{Nome do Co-orientador} % se não existir, comente essa linha
 \instituicao{%
   Centro Universitário Serra dos Órgãos - UNIFESO
@@ -136,7 +154,6 @@
 % o nome da instituição e a área de concentração 
 \preambulo{Trabalho de Conclusão de Curso apresentado ao Centro Universitário Serra dos Órgãos como requisito obrigatório para obtenção do título de Bacharel em Ciência da Computação.}
 % ---
-
 
 % ---
 % Configurações de aparência do PDF final
@@ -171,6 +188,7 @@
 % Controle do espaçamento entre um parágrafo e outro:
 \setlength{\parskip}{0.2cm}  % tente também \onelineskip
 
+\usepackage{pdfpages}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{amsmath}
@@ -205,7 +223,6 @@
   commentstyle=\color{dkgreen},       
   stringstyle=\color{mauve},     
 }
-
 
 
 % ---
@@ -351,7 +368,7 @@
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-\bibliographystyle{abntex2-alf}
+\bibliographystyle{abntex2-num}
 \bibliography{bibliografia.bib}
 
 % ---------------------------------------------------------------------------------------------
