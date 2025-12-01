@@ -1,10 +1,77 @@
 \chapter[Fundamentação]{Fundamentação Teórica}
 
-Na presente seção serão abordados tópicos específicos sobre programação e processamento de imagens que são fundamentais para a compreensão do presente trabalho. Inicialmente, será apresentado, de forma breve, os principais elementos que compõem a base do sistema desenvolvido, incluindo a linguagem escolhida para o desenvolvimento do aplicativo, bibliotecas, aspectos de UI/UX e sua importância para este projeto, bem como o paradigma de desenvolvimento adotado, sendo considerado um dos diferenciais do projeto.
+Na presente seção serão abordados tópicos específicos sobre teoria dos grafos e programação de fluxo de dados, que são essenciais para a compreensão do trabalho desenvolvido. Inicialmente, será apresentado a teoria dos grafos, incluindo suas definições, propriedades e aplicações relevantes para o contexto deste trabalho, seguido pela programação de fluxo de dados, detalhando seus principíos, caracteristicas e vantagens em relação a outros paradigmas de programação.
+
+Além disso, temas específicos como, programação e processamento de imagens que são fundamentais para a compreensão do presente trabalho. Serão apresentados, de forma breve, os principais elementos que compõem a base do sistema desenvolvido, incluindo a linguagem escolhida para o desenvolvimento dos aplicativos, bibliotecas, aspectos de UI/UX e sua importância para este projeto.
 
 Posteriormente, será abordado o tema de processamento de imagens, em maior profundidade, e suas aplicações neste trabalho, com ênfase nos conceitos práticos que embasam sua aplicação no projeto. Por fim, será discutido o processo de criação e utilização dos \textit{Shaders}, explicando seu funcionamento e importância.
 
-\section{Python}
+\section{Dataflow}
+
+"Dataflow programming (DFP) é um paradigma de programação, onde a execução do programa é conceitualizada como dados fluindo por uma série de operações ou transformações". Diferente dos paradigmas tradicionais imperativos, onde o controle do fluxo é determinando pela sequência explícita de instruções, na PFD o foco está no fluxo dos dados e na maneira como eles propagam pelos nós (ou blocos funcionais) do sistema. Nesse modelo, cada operação ou nó executa seu processamento assim que todos os dados necessários para sua execução estão disponíveis, independentemente de uma ordem de execução global. Isso torna a PFD naturalmente concorrente e paralelizável, uma vez que operações independentes podem ser executadas simultaneamente sempre que seus dados estiverem disponíveis \cite{lee-parks, devopedia}.
+
+Entre as principais características da PFD, destaca-se a execução orientada a dados. A execução de cada nó é acionada pela chegada de dados completos, dispensando o uso de estruturas tradicionais de controle de fluxo como por exemplo loops ou comandos condicionais. Ademais, como os nós são independentes, podem ser mapeados facilmente para diferentes threads ou até mesmo para processadores distintos, explorando ao máximo arquiteturas multicore e distribuídas \cite{ackerman.w.b}. O modelo PFD contribui para a tolerância a latências, pois em sistemas distribuídos ou heterogêneos diferentes nós podem prosseguir com o processando dados independentemente do tempo de processamento de outros nós \cite{malteschwarzkopf}.
+
+O Dataflow possui múltiplas implementações. Uma das implementações clássicas e mais simples é o modelo baseado em tokens, no qual os dados fluem pelos grafos na forma de tokens que transitam por filas do tipo FIFO (first in, first out) \cite{JohnstonHannaMillar, malteschwarzkopf}. Quando os dados necessários estão disponíveis nas entradas de um nó, ele é denominado de um nó \textit{fireable}, ou seja, o node está pronto para ser executado. Um nó \textit{fireable} será executado após um determinado intervalo de tempo desde o recebimento de seus dados. Passando esse período, ele é ativado, seus tokens de saída avançam para o próximo nó, o qual poderá então se tornar \textit{fireable}. O nó anterior, por sua vez, perde a denominação de \textit{fireable}, retorna ao seu estado padrão e aguarda até que o processo possa se repetir.
+
+De forma geral, programas de fluxo de dados são representados por grafos direcionados, nos quais os nós (ou vértices) representam operações ou transformações sobre os dados, enquanto arestas representam canais por onde os dados circulam entre operações, como demonstrado na Figura [\ref{fig:dataflow}], onde é feita uma comparação entre um programa comum e a sua versão utilizando o paradigma \textit{Dataflow}. Esse grafo pode ser estático ou dinâmico. Em grafos estáticos, a estrutura do fluxo é conhecida em tempo de compilação, o que facilita otimização e analises. Entretanto, certos programas não podem ser representados por esse tipo de grafo, pois laços (loops), por exemplo, só podem ser modelados caso o número de iterações já seja conhecido em tempo de compilação. Já os grafos dinâmicos, oferecem uma maior flexibilidade, permitindo que nós com múltiplos arcos sejam diferenciados por cores, em que cada cor é ativada exclusivamente para seu arco específico \cite{JohnstonHannaMillar}.
+
+Em comparação com a tradicional programação imperativa, a PFD não depende de uma sequencia explícita de instruções, mas sim das dependências entre dados. Já em relação à programação funcional, embora ambos incentivem programas sem efeitos colaterais e baseados em composição, a PFD enfatiza o movimento e a dependência de dados entre operações, enquanto a programação funcional foca principalmente em funções puras e transformações sobre coleções \cite{lee-parks}.
+
+A adoção desse paradigma traz diversas vantagens. O paralelismo surge de forma implícita, eliminando a necessidade de escrever explicitamente código de sincronização, pois o próprio modelo organiza as dependências de dados. Além disso, muitas implementação de PFD garantem determinismo, assegurando que, dado o mesmo conjunto de entradas, o programa sempre produzirá o mesmo resultado, independentemente da ordem em que as operações internas são realizadas.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/dfpex.png}
+    \caption{
+    Um simples programa (a) e o seu equivalente em no formato Dataflow (b)}
+    \label{fig:dataflow}
+    \cite{dataflow}
+\end{figure}
+
+\section{Teoria dos grafos}
+
+A teoria dos grafos é um ramo da matemática discreta que estuda as relações entre objetos representados por meio de estruturas chamadas grafos. Um grafo é definido, formalmente, como um par ordenado \(G = (V, A)\), onde \(V\) é um conjunto de vértices (ou nós), e \(A\) é o conjunto de arestas que conectam pares de vértices. Dependendo do problema ou da aplicação, grafos podem ser direcionados ou não direcionados \cite{graph-theory-1}. Na Figura [\ref{fig:graph-1}] é possível observar um exemplo simples de um grafo, onde os círculos, \textit{nodes}, representam os vértices e as linhas, \textit{edges}, que os conectam representam as arestas.
+
+Nos grafos não direcionados, as conexões entre vértices (ou nós) não possuem direção ou sentido específico; já nos grafos direcionados, cada aresta possui sentido definido, sendo por isso também chamado de arco.
+
+A origem formal do estudo dos grafos é atribuída ao matemático Leonhard Euler, que em 1736 discutiu o famoso enigma das pontes de \textit{Königsberg}, estabelecendo assim os fundamentos do que hoje é conhecido como teoria dos grafos. Desde então, o campo expandiu-se substancialmente, encontrando aplicações em diversas áreas, como ciência da computação, engenharia elétrica, biologia, logística e redes sociais \cite{graph-theory-2}.
+
+Na computação, grafos podem ser representados de diversas formas, sendo as mais comuns a matriz de adjacência e a lista de adjacência. A matriz de adjacência utiliza uma matriz bidimensional para indicar a existência de arestas entre pares de vértices, sendo eficiente para grafos densos, porém consumindo mais memória. Já a lista de adjacência associa a cada vértice uma lista de seus vizinhos, tornando-se mais eficiente em termos de memória para grafos esparsos.
+\cite{cormen2009introduction}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/graph-5.jpg}
+    \caption{
+    Um simples programa (a) e o seu equivalente em no formato Dataflow (b)}
+    \label{fig:graph-1}
+    \cite{dataflow}
+\end{figure}
+
+\section{Linguagens}
+
+\subsection{C++}
+
+C++ é uma linguagem de programação de propósito geral, compilada e orientada a objetos, conhecida por sua extrema performance, desenvolvida por \textit{Bjarne Stroustrup} no início dos anos 1980 como uma extensão da linaguagem C. Ela foi projetada para oferecer recursos avançados de programação, como abstração de dados, encapsulamento, herança e polimorfismo, mantendo a eficiência e o desempenho característicos da linguagem C \cite{cpp}.
+
+A linguagem C++ é reconhecida por sua flexibilidade e controle sobre os recursos do sistema, permitindo que desenvolvedores criem aplicações robustas e eficientes, especialmente em áreas que requerem processamento intensivo, em \textit{softwares} embarcados, sistemas criticos e de alta performance onde o desempenho é crucial \cite{isocpp-uses}.
+
+O C++ também é utilizado em diversas áreas da computação, incluindo desenvolvimento de sistemas operacionais, jogos, aplicações de alta performance e software de engenharia, medicina entre outros \cite{stroustrup2013cpp}.
+
+Embora seja uma linguagem de alto desempenho, o C++ apresenta uma curva de aprendizado mais acentuada em comparação com linguagens de mais alto nível, como o Python \cite{cpp-vs-python}.
+
+\subsection{Golang}
+
+Golang, também conhecido como Go, é uma linguagem de programação de código aberto desenvolvida pelo Google em 2007 por \textit{Robert Griesemer, Rob Pike e Ken Thompson}. Projetada para ser simples, eficiente e altamente performática, o Go combina a facilidade de uso de linguagens de alto nível com a eficiência e controle típicos de linguagens de baixo nível \cite{golang}.
+
+O Golang é amplamente utilizado em desenvolvimento de sistemas, aplicações web, serviços em nuvem e ferramentas de linha de comando, graças à sua capacidade de lidar com concorrência de forma nativa através de \textit{goroutines} e canais. Sua sintaxe clara e concisa facilita a leitura e manutenção do código, tornando-o uma escolha popular entre desenvolvedores que buscam produtividade sem sacrificar o desempenho \cite{golang-concurrency}.
+
+\subsection{Javascript}
+
+O JavaScript é uma linguagem de programação de alto nível, interpretada e orientada a objetos, amplamente utilizada no desenvolvimento web para a criação de páginas e aplicações interativas. Originalmente desenvolvido por \textit{Brendan Eich} em 1995, o JavaScript evoluiu significativamente ao longo dos anos, tornando-se uma das linguagens mais populares e versáteis do mundo da programação \cite{javascript}.
+
+\subsection{Python}
 
 Python, uma linguagem de programação de alto nível, propósito geral e interpretada, amplamente reconhecida por sua simplicidade sintática, legibilidade e ampla comunidade de usuários. Sua praticidade e versatilidade tornam-na uma escolha popular em diversas áreas da computação, incluindo, mas não se limitando a, ciência de dados, automação, desenvolvimento web e processamento de imagens \cite{Python}.
 
@@ -13,11 +80,21 @@ Essa ampla gama de recursos torna a linguagem uma ferramenta altamente eficaz pa
 
 Embora o Python possa ter um desempenho inferior quando comparado a linguagens compiladas como o C++, a vasta gama de bibliotecas otimizadas, muitas vezes escritas em C ou C++, permite que o Python alcance desempenhos comparáveis em tarefas específicas, como o processamento de imagens, graças à integração direta com a linguagem de programação C. Além disso, a facilidade de uso e a rapidez no desenvolvimento proporcionadas pela linguagem compensam eventuais perdas de performance, especialmente em protótipos e aplicações que não demandam processamento em tempo real \cite{pythonc}.
 
+\section{WASM}
+
+O WASM (WebAssembly) é um formato de código binário de baixo nível projetado para ser executado em navegadores web e outros ambientes que suportam a execução de código nativo. Desenvolvido para complementar o JavaScript, o WebAssembly permite que linguagens de programação como C, C++ e Rust sejam compiladas para um formato eficiente e portátil, possibilitando a execução de aplicações de alta performance diretamente no navegador \cite{wasm}.
+
+O WebAssembly é uma tecnologia que visa melhorar o desempenho de aplicações web, permitindo que código de baixo nível seja executado de forma mais rápida e eficiente do que o JavaScript. Ele é especialmente útil para aplicações que exigem processamento intensivo, como jogos, editores de imagem e outras ferramentas criativas \cite{wasm-goals}.
+
+\subsection{emscripten}
+
+O Emscripten é um compilador de código aberto que converte código escrito em linguagens como C e C++ para WebAssembly (WASM) ou JavaScript, permitindo que aplicações originalmente desenvolvidas para ambientes nativos sejam executadas em navegadores web. Desenvolvido por \textit{Alon Zakai}, o Emscripten utiliza o LLVM (Low Level Virtual Machine) como backend para realizar a compilação, garantindo eficiência e compatibilidade com uma ampla gama de códigos \cite{emscripten}.
+
 \section{Bibliotecas}
 
-Bibliotecas, no sentido tradicional, são locais onde inúmeros livros são  armazenados para consulta, permitindo que os leitores adquiram conhecimento em diversas áreas e sobre os mais variados temas. As bibliotecas de programação seguem um conceito semelhante sendo elas, coleções de funções, rotinas ou módulos reutilizáveis, escritas em determinada linguagem de programação \cite{GeeksForGeeks}. E assim como livros, aonde releituras ou adaptações são constantemente criadas, as bibliotecas também passam por esse mesmo processo, dependendo da licença de uma biblioteca, ela pode ser reescrita em outra linguagem, ou adaptada como um binding ou wrapper, ou uma nova versão pode ser refeita, por uma pessoa diferente ou pelo criador original da mesma \cite{bind-wrap}.
-
 Nesta seção serão abordadas as bibliotecas utilizadas neste projeto, tanto de processamento de imagens como de interface de usuário. Descrevendo-as com detalhes, destacando suas principais características, vantagens e desvantagens.
+
+Bibliotecas, no sentido tradicional, são locais onde inúmeros livros são  armazenados para consulta, permitindo que os leitores adquiram conhecimento em diversas áreas e sobre os mais variados temas. As bibliotecas de programação seguem um conceito semelhante sendo elas, coleções de funções, rotinas ou módulos reutilizáveis, escritas em determinada linguagem de programação \cite{CarrerFoundry}. E assim como livros, aonde releituras ou adaptações são constantemente criadas, as bibliotecas também passam por esse mesmo processo, dependendo da licença de uma biblioteca, ela pode ser reescrita em outra linguagem, ou adaptada como um binding ou wrapper, ou uma nova versão pode ser refeita, por uma pessoa diferente ou pelo criador original da mesma \cite{bind-wrap}.
 
 \subsection{Dear PyGui}
 
@@ -33,6 +110,10 @@ Entretanto, um dos problemas associados a esse modelo de interface é justamente
 
 No modo imediato, característico da biblioteca Dearpygui, exige que os elementos sejam desenhados a cada ciclo de atualização, ou a cada frame. Isso oferece alto controle e facilita a criação de interfaces altamente dinâmicas e responsivas, especialmente em tempo real \cite{retain-immediate}. Computadores mais fracos, em relação a CPU, acabam sofrendo com aplicações que utilizam esse modo de interface gráfica.
 
+\subsubsection{ImNodes}
+
+O \textit{ImNodes} é uma biblioteca complementar ao \textit{Dear ImGui}, que fornece funcionalidades específicas para a criação de interfaces gráficas baseadas em grafos de nós (\textit{node-based interfaces}). Desenvolvida para facilitar a construção de sistemas visuais onde os usuários podem criar, conectar e manipular nós de forma intuitiva, o \textit{ImNodes} é amplamente utilizado em aplicações como editores de shaders, ferramentas de composição visual e sistemas de fluxo de dados \cite{ImNodes}.
+
 \subsection{PILLOW}
 
 A biblioteca Pillow é uma continuação aprimorada e mantida até os dias atuais, originalmente desenvolvida sob o nome de PIL (Python Imaging Library) feita por Fredrik Lundh \cite{Pillow-Docs}, amplamente utilizada para processamento de imagens em Python. O pillow surgiu como uma fork do PIL, garantindo uma compatibilidade retroativa e adicionando suporte a recursos modernos, além da manutenção continua da comunidade \textit{open source}.
@@ -45,7 +126,15 @@ Devido a sua simplicidade, o Pillow é ideal para tarefas básicas de manipulaç
 
 \subsection{ModernGL}
 
-O ModernGL é uma biblioteca de Python que oferece uma interface simplificada para a API gráfica OpenGL, facilitando o desenvolvimento de aplicações gráficas 3D e 2D \cite{Dombi2020}. Ela abstrai muitos detalhes complexos do OpenGL tradicional, permitindo que desenvolvedores criem e manipulem objetos gráficos, buffers, texturas e shaders de forma mais direta e intuitiva.
+O \textit{ModernGL} é uma biblioteca de Python que oferece uma interface simplificada para a API gráfica OpenGL, facilitando o desenvolvimento de aplicações gráficas 3D e 2D \cite{Dombi2020}. Ela abstrai muitos detalhes complexos do OpenGL tradicional, permitindo que desenvolvedores criem e manipulem objetos gráficos, buffers, texturas e shaders de forma mais direta e intuitiva.
+
+\subsection{OpenCV}
+
+O \textit{OpenCV} é uma poderosa biblioteca de manipulação e processamento de imagens e vídeos, amplamente utilizada em diversas áreas, como visão computacional, aprendizado de máquina, robótica e análise de imagens médicas. Desenvolvida inicialmente pela Intel em 1999, a biblioteca tem o seu código aberto e possui uma vasta gama de funcionalidades que facilitam o desenvolvimento de aplicações que envolvem processamento de imagens \cite{OpenCV}.
+
+\subsection{SDL}
+
+O SDL (Simple DirectMedia Layer) é uma biblioteca de desenvolvimento multimídia de código aberto multiplataforma que é amplamente utilizada a criação de aplicações que envolvem gráficos, áudio e entrada de dispositivos. Desenvolvida inicialmente por \textit{Sam Lantinga} em 1998, o SDL é projetado para fornecer uma camada de abstração sobre as APIs específicas do sistema operacional, facilitando o desenvolvimento de software portátil e eficiente \cite{SDL}.
 
 \section{Shaders}
 
@@ -56,25 +145,3 @@ Shaders são pequenos programas que são executados diretamente na GPU (Graphica
 A área de \textit{User Interface/User Experience} representa um aspecto essencial no desenvolvimento de qualquer software sendo, site ou aplicativo. Uma interface mal projetada pode comprometer significativamente a usabilidade da aplicação, deixando-a confusa e pouco intuitiva.
 
 No contexto deste trabalho, a atenção à UI/UX foi uma das prioridades no processo de desenvolvimento. A proposta do aplicativo de ser de fácil utilização e rápido aprendizado, busca se distanciar de soluções complexas, constantemente acompanhadas com funcionalidades ocultas ou mal estruturadas.
-
-\section{Dataflow}
-
-"Dataflow programming (DFP) é um paradigma de programação, onde a execução do programa é conceitualizada como dados fluindo por uma série de operações ou transformações". Diferente dos paradigmas tradicionais imperativos, onde o controle do fluxo é determinando pela sequência explícita de instruções, na PFD o foco está no fluxo dos dados e na maneira como eles propagam pelos nós (ou blocos funcionais) do sistema. Nesse modelo, cada operação ou nó executa seu processamento assim que todos os dados necessários para sua execução estão disponíveis, independentemente de uma ordem de execução global. Isso torna a PFD naturalmente concorrente e paralelizável, uma vez que operações independentes podem ser executadas simultaneamente sempre que seus dados estiverem disponíveis \cite{lee-parks, devopedia}.
-
-Entre as principais características da PFD, destaca-se a execução orientada a dados. A execução de cada nó é acionada pela chegada de dados completos, dispensando o uso de estruturas tradicionais de controle de fluxo como por exemplo loops ou comandos condicionais. Ademais, como os nós são independentes, podem ser mapeados facilmente para diferentes threads ou até mesmo para processadores distintos, explorando ao máximo arquiteturas multicore e distribuídas \cite{ackerman.w.b}. O modelo PFD contribui para a tolerância a latências, pois em sistemas distribuídos ou heterogêneos diferentes nós podem prosseguir com o processando dados independentemente do tempo de processamento de outros nós \cite{malteschwarzkopf}.
-
-O Dataflow possui múltiplas implementações. Uma das implementações clássicas e mais simples é o modelo baseado em tokens, no qual os dados fluem pelos grafos na forma de tokens que transitam por filas do tipo FIFO (first in, first out) \cite{JohnstonHannaMillar, malteschwarzkopf}. Quando os dados necessários estão disponíveis nas entradas de um nó, ele é denominado de um nó \textit{fireable}, ou seja, o node está pronto para ser executado. Um nó \textit{fireable} será executado após um determinado intervalo de tempo desde o recebimento de seus dados. Passando esse período, ele é ativado, seus tokens de saída avançam para o próximo nó, o qual poderá então se tornar \textit{fireable}. O nó anterior, por sua vez, perde a denominação de \textit{fireable}, retorna ao seu estado padrão e aguarda até que o processo possa se repetir.
-
-De forma geral, programas de fluxo de dados são representados por grafos direcionados, nos quais os nós (ou vértices) representam operações ou transformações sobre os dados, enquanto arestas representam canais por onde os dados circulam entre operações. Esse grafo pode ser estático ou dinâmico. Em grafos estáticos, a estrutura do fluxo é conhecida em tempo de compilação, o que facilita otimização e analises. Entretanto, certos programas não podem ser representados por esse tipo de grafo, pois laços (loops), por exemplo, só podem ser modelados caso o número de iterações já seja conhecido em tempo de compilação. Já os grafos dinâmicos, oferecem uma maior flexibilidade, permitindo que nós com múltiplos arcos sejam diferenciados por cores, em que cada cor é ativada exclusivamente para seu arco específico \cite{JohnstonHannaMillar}.
-
-Em comparação com a tradicional programação imperativa, a PFD não depende de uma sequencia explícita de instruções, mas sim das dependências entre dados. Já em relação à programação funcional, embora ambos incentivem programas sem efeitos colaterais e baseados em composição, a PFD enfatiza o movimento e a dependência de dados entre operações, enquanto a programação funcional foca principalmente em funções puras e transformações sobre coleções \cite{lee-parks}.
-
-A adoção desse paradigma traz diversas vantagens. O paralelismo surge de forma implícita, eliminando a necessidade de escrever explicitamente código de sincronização, pois o próprio modelo organiza as dependências de dados. Além disso, muitas implementação de PFD garantem determinismo, assegurando que, dado o mesmo conjunto de entradas, o programa sempre produzirá o mesmo resultado, independentemente da ordem em que as operações internas são realizadas.
-
-\section{Teoria dos grafos}
-
-A teoria dos grafos é um ramo da matemática discreta que estuda as relações entre objetos representados por meio de estruturas chamadas grafos. Um grafo é definido, formalmente, como um par ordenado \(G = (V, A)\), onde \(V\) é um conjunto de vértices (ou nós), e \(A\) é o conjunto de arestas que conectam pares de vértices. Dependendo do problema ou da aplicação, grafos podem ser direcionados ou não direcionados \cite{graph-theory-1}.
-
-Nos grafos não direcionados, as conexões entre vértices (ou nós) não possuem direção ou sentido específico; já nos grafos direcionados, cada aresta possui sentido definido, sendo por isso também chamado de arco.
-
-A origem formal do estudo dos grafos é atribuída ao matemático Leonhard Euler, que em 1736 discutiu o famoso enigma das pontes de Königsberg, estabelecendo assim os fundamentos do que hoje é conhecido como teoria dos grafos. Desde então, o campo expandiu-se substancialmente, encontrando aplicações em diversas áreas, como ciência da computação, engenharia elétrica, biologia, logística e redes sociais \cite{graph-theory-2}.

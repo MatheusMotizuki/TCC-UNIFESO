@@ -76,7 +76,25 @@
 \usepackage{lipsum}             % Pacote para Lorem Ipsum.
 \usepackage{float}              % Pacote para posicionamento de elementos, e.g. Tabelas, figuras, equações, etc.
 % ---
-		
+\usepackage{tcolorbox}
+\tcbuselibrary{listings,skins,breakable}
+
+
+\newtcolorbox{InvisibleCodeBox}{
+    breakable=false,
+    enhanced,
+    colback=white,      % background = full white (blend with page)
+    colframe=white,     % border = white (invisible)
+    boxrule=0pt,        % no border line
+    arc=0mm,            % square corners (no visible edges)
+    left=0mm,           % no padding on left
+    right=0mm,          % no padding on right
+    top=0mm,
+    bottom=0mm,
+    enlarge top by=0mm,
+    enlarge bottom by=0mm,
+    boxsep=0pt,         % zero spacing
+}
 
 \usepackage{float}
 \usepackage{subfig}
@@ -86,7 +104,7 @@
 % Pacotes de citações
 % ---
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\usepackage[num]{abntex2cite}	% Citações padrão ABNT
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
 
 %-------------------
 %COMANDO PARA NOTAS DE RODAPE
@@ -170,6 +188,7 @@
 % Controle do espaçamento entre um parágrafo e outro:
 \setlength{\parskip}{0.2cm}  % tente também \onelineskip
 
+\usepackage{pdfpages}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{amsmath}
@@ -204,7 +223,6 @@
   commentstyle=\color{dkgreen},       
   stringstyle=\color{mauve},     
 }
-
 
 
 % ---
@@ -272,9 +290,17 @@
 % ---------------------------------------------se não houver nenhuma sigla, comente esta seção-
 % ---------------------------------------------------------------------------------------------
 \begin{siglas}
-        \item[PFD]  Programação de fluxo de dados
-        \item[DFP]  Dataflow programming
-        \item[CSS]  Cascading Style Sheets
+    \item[API] Application Programming Interface
+    \item[CSS] Cascading Style Sheets
+    \item[DFD] Dataflow Diagram
+    \item[DFP] Dataflow Programming
+    \item[GPU] Graphics Processing Unit
+    \item[PFD] Programação de Fluxo de Dados
+    \item[RAM] Random Access Memory
+    \item[SDL] Simple DirectMedia Layer
+    \item[UI] User Interface
+    \item[UX] User Experience
+    \item[WASM] WebAssembly
 \end{siglas}
 % ---
 
@@ -342,7 +368,7 @@
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-\bibliographystyle{abntex2-alf}
+\bibliographystyle{abntex2-num}
 \bibliography{bibliografia.bib}
 
 % ---------------------------------------------------------------------------------------------

@@ -1,10 +1,9 @@
-\chapter[Implementação do PhotoEditor]{Implementação do PhotoEditor}
+\chapter[Implementação do PhotoGraph]{Implementação do PhotoGraph}
 \renewcommand{\thelstlisting}{\arabic{lstlisting}}
 
-Na presente seção, será descrita a metodologia utilizada para a realização deste trabalho, separada por tópicos que englobam todo o processo de criação do projeto.
+Na presente seção será detalhada a implementação do aplicativo \textit{PhotoGraph}, abordando as tecnologias utilizadas, a arquitetura do sistema, os principais componentes desenvolvidos e o fluxo de dados dentro do aplicativo.
 
 O processo de desenvolvimento foi dividido em etapas bem definidas, abrangendo o levantamento de requisitos, a arquitetura do sistema, implementação dos módulos, os resultados e as limitações.
-
 
 \section{Visão Geral do Projeto}
 
@@ -14,7 +13,7 @@ A criação de um software de edição de imagens baseado em nodes tem como obje
 
 \section{Requisitos}
 
-Nesta seção, serão detalhados os requisitos do sistema, que guiaram o desenvolvimento do projeto. Os requisitos foram coletados por meio de análise de softwares similares.
+Nesta seção, serão detalhados os requisitos do sistema, que guiaram o desenvolvimento do projeto. Os requisitos foram coletados por meio de análise de softwares similares. A Tabela [\ref{tab:requisitos}] apresenta uma visão geral dos principais requisitos identificados para o sistema.
 
 \begin{table}[H]
     \centering
@@ -51,7 +50,7 @@ Esta abordagem oferece vantagens significativas sobre interfaces tradicionais: p
 
 A arquitetura de comunicação entre componentes é baseada em eventos, onde mudanças em um nó disparam atualizações nos nós subsequentes. Esta abordagem reativa garante que o estado do sistema permaneça consistente, com atualizações propagadas automaticamente através do grafo conforme o usuário interage com a interface.
 
-A Figura [\ref{fig:diagrama-arquitetura}] ilustra a arquitetura geral do sistema, destacando os principais componentes e suas interações, o usuário interage com a interface gráfica, que se comunica com o motor de processamento de imagens, o processamento é realizado por módulos especializados, dependendo do tipo do nó, após o processamento da imagem, o mesmo nó também envia um evento ao servidor websocket, caso o usuário esteja em uma sessão colaborativa, para que as outras instâncias do programa sejam atualizadas de acordo com as mudanças feitas pelo usuário, após a imagem ser processada, a interface gráfica é atualizada com a mudança realizada. O sistema de colaboração em tempo real, também é responsável por receber informações vindas do servidor para atualizar a interface gráfica do usuário que não realizou a modificação em sua sessão local.
+A Figura~[\ref{fig:diagrama-arquitetura}] ilustra a arquitetura geral do sistema, destacando os principais componentes e suas interações, o usuário interage com a interface gráfica, que se comunica com o motor de processamento de imagens, o processamento é realizado por módulos especializados, dependendo do tipo do nó, após o processamento da imagem, o mesmo nó também envia um evento ao servidor websocket, caso o usuário esteja em uma sessão colaborativa, para que as outras instâncias do programa sejam atualizadas de acordo com as mudanças feitas pelo usuário, após a imagem ser processada, a interface gráfica é atualizada com a mudança realizada. O sistema de colaboração em tempo real, também é responsável por receber informações vindas do servidor para atualizar a interface gráfica do usuário que não realizou a modificação em sua sessão local.
 
 \begin{figure}[H]
     \centering
@@ -60,26 +59,58 @@ A Figura [\ref{fig:diagrama-arquitetura}] ilustra a arquitetura geral do sistema
     \label{fig:diagrama-arquitetura}
 \end{figure}
 
+\subsection{Servidor Backend WebSocket}
+
+O backend responsável pela comunicação em tempo real entre os usuários foi desenvolvido utilizando a linguagem Go (Golang) para a versão C++ do aplicativo. A escolha do Go se deu por sua alta performance, simplicidade e suporte nativo à concorrência, características essenciais para gerenciar múltiplas conexões WebSocket de forma eficiente.
+
+Na versão Python, o servidor backend foi implementado com a biblioteca FastAPI, que oferece uma estrutura leve para criação de APIs web e suporte nativo a WebSockets. Isso facilita a implementação do sistema de colaboração em tempo real, permitindo que múltiplos usuários editem simultaneamente o mesmo projeto.
+
+O backend WebSocket é responsável por receber eventos de edição dos clientes, processar e distribuir essas alterações para todos os participantes da sessão, garantindo a integridade e consistência dos dados compartilhados. Essa arquitetura permite que o sistema seja escalável e mantenha baixa latência, mesmo com diversos usuários conectados simultaneamente.
+
 \subsection{Interface Gráfica}
 
-O desenvolvimento da interface gráfica foi realizado utilizando a biblioteca Dear PyGui (DPG), um \textit{framework} moderno de interface gráfica que oferece renderização acelerada por hardware e suporte nativo a editores baseados em nós. Esta escolha diferencia-se de \textit{frameworks} tradicionais como TKinter ou PyQt por oferecer performance superior em aplicações gráficas intensivas e APIs simplificadas para criação de editores visuais.
+\subsubsection{Python}
+
+O desenvolvimento da interface gráfica foi realizado utilizando a biblioteca Dear PyGui (DPG), um \textit{framework} moderno de interface gráfica que oferece renderização acelerada por hardware e suporte nativo a editores baseados em nós, na Figura [\ref{fig:interface-nodes}], é demonstrado um exemplo de como a interface gráfica se apresenta na versão Python do aplicativo. Esta escolha diferencia-se de \textit{frameworks} tradicionais como TKinter ou PyQt por oferecer performance superior em aplicações gráficas intensivas e APIs simplificadas para criação de editores visuais.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{imagens/canva_aplicativo.png}
-    \caption{Imagem da interface do programa}
+    \caption{Imagem da interface do programa versão Python}
     \label{fig:interface-nodes}
 \end{figure}
 
-A integração de outras bibliotecas com o Dear PyGui requer uma compreensão profunda do seu modelo de programação, modo imediato, pois o DPG opera em um loop de renderização contínuo onde a interface é atualizada frame a frame, diferindo de \textit{frameworks} baseados em eventos tradicionais como Tkinter ou PyQt.
-
-A biblioteca abstrai muitos detalhes de baixo nível, permitindo que o desenvolvedor foque na lógica da aplicação ao invés de detalhes de renderização. Isso acelera o desenvolvimento e reduz a complexidade do código.
+A integração de outras bibliotecas com o Dear PyGui requer uma compreensão profunda do seu modelo de programação, modo imediato, pois o DPG opera em um loop de renderização contínuo onde a interface é atualizada frame a frame, diferindo de \textit{frameworks} baseados em eventos tradicionais como Tkinter, PyQt, GTKmm, entre outros.
 
 A criação de nós na interface gráfica é realizada utilizando os \textit{context managers} do Python, permitindo assim a criação de objetos de forma eficiente. Os \textit{context managers} são utilizados para garantir que os elementos criados sejam devidamente destruídos após o uso, garantindo a integridade do sistema e prevenindo que erros que acontecem durante a execução do programa não sejam ignorados ou que façam o programa fechar de forma abrupta.
 
+\subsubsection{C++}
+
+A criação da interface gráfica em C++ utiliza a biblioteca Dear ImGui, que é a versão em C++ do Dear PyGui. A implementação da interface gráfica em C++ segue os mesmos princípios e estrutura da versão Python, adaptando-se às particularidades da linguagem para garantir compatibilidade e performance.
+
+Utilizando a biblioteca ImNodes para a geração dos nós, a interface gráfica é construída de forma modular, permitindo a criação, conexão e manipulação visual dos nós de edição de imagem, como demonstrado na Figura [\ref{fig:versao-cpp}], onde é possivel notar os nós, que realizam as operações, e a quantidade abundante de conexões, demonstrando a capacidade e a melhor otimização feita por essa versão. A integração com outras bibliotecas, como OpenCV para processamento de imagens, é realizada através de conversões cuidadosas entre formatos de dados, garantindo que as imagens possam ser renderizadas eficientemente na interface gráfica.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/image.png}
+    \caption{Imagem da interface do programa versão C++}
+    \label{fig:versao-cpp}
+\end{figure}
+
+\subsubsection{WASM}
+
+A versão WebAssembly do aplicativo mantém a mesma estrutura e funcionalidades das versões desktop, feita em C++, adaptando-se ao ambiente do navegador, como exemplificado na Figura [\ref{fig:versao-wasm}], nota-se a utilização do navegador para acessar o aplicativo, assim sendo demonstrado como o código anteriormente compilado nátivo para executáveis, pode ser utilizado na \textit{web}. O aplicativo é compilado para WebAssembly através do Emscripten, permitindo a execução diretamente no navegador com performance próxima ao nativo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagens/web_version.jpg}
+    \caption{Imagem da interface do programa versão WebAssembly}
+    \label{fig:versao-wasm}
+\end{figure}
+
 \subsection{Design da Interface}
 
-A interface principal do aplicativo utiliza uma janela única maximizada que aproveita todo o espaço disponível da tela. Esta abordagem elimina distrações e fornece o máximo de espaço para o canvas de edição.
+A interface principal do aplicativo utiliza uma janela única maximizada que aproveita todo o espaço disponível da tela. Esta abordagem elimina distrações e fornece o máximo de espaço para o canvas de edição, como demonstrado na Figura [\ref{fig:interface-nodes}].
 
 O aplicativo implementa menus de funcionalidades simples e diretos, organizados logicamente: menu \textit{File} para operações de projeto, menu \textit{Help} para documentação e links externos, e menu \textit{Dev} para ferramentas de desenvolvimento e debug.
 
@@ -95,6 +126,8 @@ A escolha da paleta de cores leva em conta também a acessibilidade, utilizando 
 
 \subsection{Processamento de Imagens}
 
+\subsubsection{Python}
+
 A biblioteca Pillow (PIL) foi selecionada como base para operações de processamento de imagem devido à sua estabilidade, performance otimizada e suporte abrangente a formatos de arquivo. Pillow oferece operações fundamentais como conversão de espaços de cor, redimensionamento, filtros básicos e manipulação de canais, formando a base sobre a qual algoritmos mais complexos são construídos.
 
 A integração entre Pillow e Dear PyGui requer conversão cuidadosa entre formatos de dados, onde imagens são convertidas de objetos PIL para arrays numpy e subsequentemente para texturas GPU para renderização eficiente na interface gráfica.
@@ -102,6 +135,10 @@ A integração entre Pillow e Dear PyGui requer conversão cuidadosa entre forma
 Além do Pillow, foi utilizada a biblioteca ModernGL para operações mais complexas de processamento de imagens como o uso de \textit{fragment shaders} e \textit{vertex shaders}, que permitem a manipulação direta de pixels na GPU, proporcionando performance superior para efeitos visuais avançados.
 
 Embora a implementação atual seja principalmente \textit{single-threaded} para simplicidade, a arquitetura suporta extensão para processamento paralelo. Nós independentes em um grafo podem ser processados simultaneamente, e operações computacionalmente intensivas podem utilizar \textit{threading} para manter a responsividade da interface. Com a utilização de um sistema de distribuição de tarefas, o sistema pode ser escalado para aproveitar múltiplos núcleos de CPU.
+
+\subsubsection{C++ / WASM}
+
+A biblioteca OpenCV foi escolhida para o processamento de imagens na versão C++ do aplicativo devido à sua robustez, performance otimizada e ampla gama de funcionalidades. OpenCV oferece uma vasta coleção de algoritmos para manipulação de imagens, incluindo operações básicas como ajuste de cores e filtros, bem como técnicas avançadas como detecção de bordas, transformações geométricas e processamento em tempo real.
 
 \subsection{Tipos de Nós}
 
@@ -111,29 +148,38 @@ Na presente seção será detalhada a implementação dos principais tipos de n�
 
 A arquitetura de nós é fundamentada em uma classe base abstrata, chamada de \textit{NodeCore}, que define a interface comum para todos os tipos de nós. Esta classe implementa funcionalidades essenciais como gerenciamento de estado, serialização, conexões entre nós, integração com o sistema de interface gráfica, posicionamento automático e atualizações automáticas no servidor websocket.
 
-A implementação da classe base estabelece padrões nos quais nós subsequentes devem seguir, garantindo consistência e reusabilidade. O método \textit{initialize()} é responsável pela criação visual do nó na interface, enquanto o método \textit{run()} é responsável pela lógica de processamento específica de cada nó, como demonstrado no código [\ref{lst:nodecore}]. A classe base também implementa um método para gerenciar a criação de nós no servidor websocket, garantindo a singularidade de nós por meio de um sistema de tags.
+A implementação da classe base estabelece padrões nos quais nós subsequentes devem seguir, garantindo consistência e reusabilidade. O Código [\ref{lst:nodecore}] apresenta uma visão geral da estrutura da classe base \textit{NodeCore}, destacando seus principais atributos e métodos.
 
-\begin{lstlisting}[language=Python, caption={Exemplo de implementação da classe base NodeCore}, label={lst:nodecore}]
-class NodeCore:
-    def __init__(self):
-        self.settings = {}
-        self.last_node_id = None
-        self.counter = 0
+\begin{InvisibleCodeBox}
+\begin{lstlisting}[caption={Exemplo de implementação da classe base NodeCore}, label={lst:nodecore}]
+Classe NodeBase:
+    id: inteiro
+    titulo: texto
+    tipo_pino: (entrada, saida, ambos)
+    imagem_entrada: imagem
+    imagem_saida: imagem
+    deletavel: booleano
 
-    def initialize(self, parent=None, node_tag: str | None = None, pos: list[int] | None = None):
-        # Implementacao de criacao visual do no
-        pass
-    
-    def run(self, image: Image.Image, tag: str) -> Image.Image:
-        # Metodo abstrato para o processamento
-        raise NotImplementedError
+    void initializar(parametros):
+        configurar estado inicial
+        criar elementos da interface grafica
+        definir conexoes de entrada e saida
+
+    virtual image_saida processar(imagem_entrada):
+        metodo abstrato - implementado por subclasses
+        responsavel por processar a imagem e retornar o resultado
+
+    virtual void descricao(texto: descricao):
+        metodo abstrato - implementado por subclasses
+        fornece uma descricao do node
 \end{lstlisting}
+\end{InvisibleCodeBox}
 
-A classe base utiliza um sistema de tags, permitindo a identificação única de cada nó, garantindo a existência de múltiplas instâncias do mesmo tipo de nó sem conflitos. A classe base também contém um método de posicionamento automático para a prevenção de sobreposição de nós na interface.
+A classe base utiliza um sistema de ids unicos para cada node gerado pelo programa, assim evitando que nodes possam ter ids duplicados. Cada nó herda a classe base e implementa suas funcionalidades específicas, garantindo que todos os nós sigam a mesma estrutura e possam ser integrados de forma consistente no sistema.
 
 \subsubsection{Monocromo}
 
-A implementação do nó de conversão monocromática exemplifica a arquitetura de processamento adotada. Este nó converte imagens coloridas para escala de cinza utilizando o método padrão de conversão do Pillow, que preserva informações de luminância perceptual.
+A implementação do nó de conversão monocromática exemplifica a arquitetura de processamento adotada. Este nó converte imagens coloridas para escala de cinza utilizando o método padrão de conversão do Pillow, que preserva informações de luminância perceptual, conforme demonstrado na Figura [\ref{fig:interface-nodes-monocromo}], um nó simples sem mais parâmetros configuráveis. O Código [\ref{lst:monocromo}] apresenta a implementação da função \textit{run()} do nó monocromático, responsável por executar a lógica de conversão da imagem.
 
 \begin{lstlisting}[language=Python, caption={Implementação do método run do nó monocromático}, label={lst:monocromo}]
 def run(self, image: Image.Image, tag: str) -> Image.Image:
@@ -151,10 +197,11 @@ Ao analisarmos a implementação, a conversão passa por duas etapas: primeiro c
 
 \subsubsection{Brilho}
 
-O sistema de ajuste de brilho segue uma abordagem similar ao nó monocromático, utilizando a classe base para definir a estrutura do nó e implementando a lógica específica na função \textit{run()}. O nó de ajuste de brilho inclui um parâmetro configurável que permite ao usuário definir o nível de brilho desejado da imagem, usando um \textit{slider} na interface gráfica.
+O sistema de ajuste de brilho segue uma abordagem similar ao nó monocromático, utilizando a classe base para definir a estrutura do nó e implementando a lógica específica na função \textit{run()}. O nó de ajuste de brilho inclui um parâmetro configurável que permite ao usuário definir o nível de brilho desejado da imagem, usando um \textit{slider} na interface gráfica, conforme demonstrado na Figura [\ref{fig:interface-nodes-brilho}], nota-se o nó de brilho com seu controle deslizante, para alteração de valores de brilho de uma imagem qualquer.
 
-O código abaixo demonstra a implementação do \textit{slider} que o nó de brilho utiliza para receber o valor do usuário:
+A implementação do nó de brilho utiliza um input fornecido pelo usuário para definir o valor de ajuste aplicado à imagem, conforme ilustrado no Código \ref{lst:slider-brilho}, onde é possivel observar o uso de um \textit{slider} para capturar o valor do brilho.
 
+\begin{InvisibleCodeBox}
 \begin{lstlisting}[language=Python, caption={Implementação do slider para ajuste de brilho}, label={lst:slider-brilho}]
 class BrightnessNode(NodeCore):
     def initialize(self, parent=None, node_tag: str | None = None, pos: list[int] | None = None):
@@ -170,6 +217,7 @@ class BrightnessNode(NodeCore):
             callback=self.update_output
             )
 \end{lstlisting}
+\end{InvisibleCodeBox}
 
 A lógica de processamento do nó de brilho implementa a função \textit{run()}, que recebe a imagem de entrada e aplica o ajuste de brilho conforme o valor selecionado pelo usuário. Este sistema é integrado ao pipeline visual, permitindo que o nó de brilho seja conectado a outros nós para compor fluxos de edição personalizados.
 
@@ -182,10 +230,9 @@ A lógica de processamento do nó de brilho implementa a função \textit{run()}
 
 \subsubsection{Desfoque}
 
-O sistema de desfoque implementa alguns dos algoritmos mais comuns de desfoque, como o desfoque gaussiano e o desfoque de caixa. O nó de desfoque também inclui um parâmetro configurável que permite ao usuário final definir o nível de intensidade do desfoque e o método a ser aplicado.
+O sistema de desfoque implementa alguns dos algoritmos mais comuns de desfoque, como o desfoque gaussiano e o desfoque de caixa. O nó de desfoque também inclui um parâmetro configurável que permite ao usuário final definir o nível de intensidade do desfoque e o método a ser aplicado, conforme demonstrado na Figura [\ref{fig:interface-nodes-desfoque}], é possivel visualizar o nó de desfoque com seus controles deslizantes e dropdown para alteração de valores e tipos de desfoque. O Código [\ref{lst:slider-desfoque}] apresenta a implementação do slider e do dropdown utilizados para capturar os parâmetros de desfoque na interface gráfica.
 
-O código abaixo demonstra a implementação do \textit{slider e o dropdown} que o nó de desfoque utiliza para receber o valor do usuário e o tipo:
-
+\begin{InvisibleCodeBox}
 \begin{lstlisting}[language=Python, caption={Implementação do slider e dropdown para desfoque}, label={lst:slider-desfoque}]
 class BlurNode(NodeCore):
     BLUR_TYPES = {
@@ -195,21 +242,14 @@ class BlurNode(NodeCore):
         ...
         dpg.add_combo(
             items=list(self.BLUR_TYPES.keys()),
-            default_value="BoxBlur",
-            tag=f"blur_type_{idx}",
-            label="Blur Type",
-            width=150,
+            ...,
             callback=self.update_output)
         dpg.add_slider_int(
             tag=f"blur_strength_{idx}",
-            label="Strength",
-            width=150,
-            min_value=0,
-            max_value=20,
-            default_value=0,
-            clamped=True,
+            ...,
             callback=self.update_output)
 \end{lstlisting}
+\end{InvisibleCodeBox}
 
 \begin{figure}[H]
     \centering
@@ -232,7 +272,7 @@ A utilização de ModernGL e GLSL abstrai grande parte da complexidade do OpenGL
 
 \subsubsection{Entrada}
 
-O nó de entrada é responsável por carregar imagens do sistema de arquivos para o pipeline de processamento. Utiliza diálogo da biblioteca Dear PyGui para a seleção de arquivos.
+O nó de entrada é responsável por carregar imagens do sistema de arquivos para o pipeline de processamento. Utiliza diálogo da biblioteca Dear PyGui para a seleção de arquivos. A Figura~[\ref{fig:interface-nodes-entrada}] apresenta a interface do nó de entrada, onde o usuário pode selecionar uma imagem para carregar no sistema.
 
 O nó utiliza a biblioteca Pillow para abrir e converter imagens para o formato RGBA, garantindo compatibilidade com o restante do sistema de nós. Após o carregamento, a imagem é convertida em uma textura pela biblioteca NumPy, para que possa ser renderizada pela biblioteca Dear PyGui.
 
@@ -245,7 +285,7 @@ O nó utiliza a biblioteca Pillow para abrir e converter imagens para o formato 
 
 \subsubsection{Saída}
 
-O nó de saída é responsável por fornecer uma visualização do resultado final do pipeline de processamento e salvar a imagem processada de volta ao sistema de arquivos. O nó exibe a imagem resultante em um \textit{widget} de imagem dentro do nó.
+O nó de saída é responsável por fornecer uma visualização do resultado final do pipeline de processamento e salvar a imagem processada de volta ao sistema de arquivos. O nó exibe a imagem resultante em um \textit{widget} de imagem dentro do nó. A Figura~[\ref{fig:interface-nodes-saida}] apresenta a interface do nó de saída, onde o usuário pode visualizar a imagem processada e salvar o resultado.
 
 O sistema de visualização utiliza texturas geradas pela biblioteca Dear PyGui para renderizar a imagem processada diretamente na interface gráfica. Isso permite ao usuário ver o resultado final do pipeline de edição em tempo real.
 
@@ -270,11 +310,11 @@ As conexões são validadas em tempo real para garantir compatibilidade de tipos
 
 O fluxo de dados utiliza avaliação sob demanda (lazy evaluation), onde nós são executados apenas quando seus resultados são necessários. Esta abordagem otimiza a performance ao evitar cálculos desnecessários em ramos não utilizados do grafo.
 
-A imagem [\ref{fig:interface-nodes-fluxo-completo}] ilustra um fluxo completo do sistema, demonstrando a interconexão entre diferentes tipos de nós e o caminho que os dados percorrem desde a entrada até a saída final.
+A Figura~[\ref{fig:versao-wasm}] ilustra um fluxo completo do sistema, demonstrando a interconexão entre diferentes tipos de nós e o caminho que os dados percorrem desde a entrada até a saída final.
 
 \subsection{Sistema de colaboração}
 
-A funcionalidade de colaboração em tempo real permite múltiplos usuários editarem o mesmo projeto simultaneamente. Mudanças são sincronizadas automaticamente entre todas as instâncias conectadas, utilizando um servidor WebSocket para comunicação eficiente.
+A funcionalidade de colaboração em tempo real permite múltiplos usuários editarem o mesmo projeto simultaneamente. Mudanças são sincronizadas automaticamente entre todas as instâncias conectadas, utilizando um servidor WebSocket para comunicação eficiente. A Figura~[\ref{fig:websocket-server}] apresenta a imagem da caixa de escolha, que o usuário pode selecionar para entrar em uma sessão colaborativa, ou iniciar um projeto comum.
 
 Funcionalidades de sessão permitem usuários entrarem e saírem de sessões colaborativas sem interromper o fluxo de trabalho dos demais usuários.
 
@@ -287,8 +327,9 @@ Funcionalidades de sessão permitem usuários entrarem e saírem de sessões col
 
 \subsection{Servidor Websocket}
 
-O sistema de colaboração implementa um servidor WebSocket utilizando a biblioteca FastAPI, proporcionando comunicação bidirecional de baixa latência entre múltiplas instâncias do editor. Esta escolha tecnológica oferece performance superior a protocolos tradicionais HTTP para aplicações em tempo real.
+O sistema de colaboração implementa um servidor WebSocket utilizando a biblioteca FastAPI, proporcionando comunicação bidirecional de baixa latência entre múltiplas instâncias do editor. Esta escolha tecnológica oferece performance superior a protocolos tradicionais HTTP para aplicações em tempo real. O Código [\ref{lst:websocket-server}] apresenta a implementação básica do servidor WebSocket, destacando a configuração inicial e o \textit{endpoint} responsável por gerenciar conexões de clientes.
 
+\begin{InvisibleCodeBox}
 \begin{lstlisting}[language=Python, caption={Servidor WebSocket para colaboração}, label={lst:websocket-server}]
 # Servidor WebSocket para colaboracao
 app = FastAPI()
@@ -298,6 +339,7 @@ async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     # Implementacao de comunicacao colaborativa
 \end{lstlisting}
+\end{InvisibleCodeBox}
 
 O servidor gerencia sessões de colaboração, autenticação de usuários e sincronização de estado entre clientes conectados. Implementa broadcasting eficiente de mudanças para todos os participantes de uma sessão.
 
@@ -311,13 +353,64 @@ O envio de informações ao servidor é realizado sempre que uma modificação �
 
 O cliente possui um sistema efetivo de gerenciamento de estado, garantindo que mudanças locais sejam refletidas corretamente no servidor e vice-versa. Implementa mecanismos de resolução de conflitos para lidar com edições simultâneas por múltiplos usuários, garantindo a integridade dos dados compartilhados.
 
-\section{Resultados}
+\section{Comparação entre as versões}
 
-Na presente seção, serão apresentados os resultados obtidos a partir da implementação do sistema de edição de imagens baseado em nodes. Serão discutidos aspectos como performance, usabilidade e feedback dos usuários(maybe).
+Para fins de comparação, foram implementadas três versões distintas do mesmo aplicativo, cada uma utilizando tecnologias diferentes, a fim de demonstrar as vantagens e limitações de cada abordagem, exemplificado na tabela [\ref{tab:comparacao}], onde as comparações entre as versões criadas são apresentadas e detalhadas. Todas as versões compartilham a mesma arquitetura e funcionalidades principais, diferenciando-se apenas pela linguagem de programação, bibliotecas utilizadas e desempenho. E na tabela [\ref{tab:repositorios}] são apresentados os repositórios onde o código-fonte de cada versão está disponível para consulta e download.
 
-\begin{figure}[H]
+\begin{itemize}
+    \item \textbf{Versão Python:} Desenvolvida com a linguagem Python, utiliza a biblioteca Dear PyGui para a interface gráfica e Pillow para manipulação de imagens. Esta versão oferece uma fácil de instalação e modificação, e conta com sistema de colaboração em tempo real implementado via biblioteca Websockets, embora apresente desempenho inferior em operações intensivas devido às limitações da linguagem interpretada.
+
+    \item \textbf{Versão C++:} Desenvolvida em C++, emprega Dear ImGui para a interface gráfica e OpenCV para processamento de imagens. O sistema de colaboração em tempo real utiliza a biblioteca libhv para comunicação com o servidor backend. Esta versão se destaca pelo alto desempenho, sendo capaz de processar imagens grandes com maior rapidez e eficiência. É mais indicada para ambientes que exigem performance, embora a configuração e manutenção sejam mais complexas.
+
+    \item \textbf{Versão WebAssembly (WASM):} Esta versão compila o código C++ para WebAssembly usando Emscripten, permitindo a execução diretamente no navegador. Utiliza Dear ImGui para a interface gráfica e OpenCV para manipulação de imagens, mantendo as funcionalidades das versões desktop. A principal vantagem é a acessibilidade, pois não requer instalação local e pode ser utilizada em qualquer dispositivo com navegador moderno. O desempenho é próximo ao nativo, aproveitando a execução otimizada do WebAssembly.
+\end{itemize}
+
+Cada versão foi projetada para atender diferentes cenários de uso, proporcionando uma análise comparativa entre facilidade de desenvolvimento, desempenho, portabilidade e experiência do usuário, conforme detalhado na Tabela [\ref{tab:comparacao}], onde são apresentadas as principais características de cada implementação do aplicativo e seus respectivos comparativos. Além disso, a Tabela [\ref{tab:repositorios}] lista os repositórios onde o código-fonte de cada versão está disponível para consulta e download.
+
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.7} % aumenta a altura das linhas
+    \setlength{\tabcolsep}{18pt} % aumenta o espaçamento entre colunas
     \centering
-    \includegraphics[width=1\textwidth]{imagens/fluxo_completo.jpg}
-    \caption{Fluxo completo do sistema}
-    \label{fig:interface-nodes-fluxo-completo}
-\end{figure}
+    \caption{Comparação entre as versões Python, C++ e WebAssembly do aplicativo}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        Característica & \textbf{Python} & \textbf{C++} & \textbf{WebAssembly} \\
+        \hline
+        Desempenho & Médio & Alto & Alto \\
+        \hline
+        Facilidade de desenvolvimento & Alta & Média & Média \\
+        \hline
+        Portabilidade & Alta & Média & Muito Alta (Web) \\
+        \hline
+        Interface gráfica & Sim & Sim & Sim (Web) \\
+        \hline
+        Suporte à colaboração & Sim & Sim & Não \\
+        \hline
+        Consumo de recursos & Moderado & Baixo & Baixo \\
+        \hline
+        Integração com web & Limitada & Limitada & Total \\
+        \hline
+        Curva de aprendizado & Baixa & Alta & Média \\
+        \hline
+    \end{tabular}
+    \label{tab:comparacao}
+\end{table}
+
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.5}
+    \setlength{\tabcolsep}{12pt}
+    \centering
+    \caption{Repositórios dos projetos desenvolvidos}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        Versão & Repositório & Branch \\
+        \hline
+        Python & \texttt{https://github.com/MatheusMotizuki/photograph\_py} & master \\
+        \hline
+        C++ & \texttt{https://github.com/MatheusMotizuki/Photograph} & master \\
+        \hline
+        WebAssembly & \texttt{https://github.com/MatheusMotizuki/Photograph} & wasm \\
+        \hline
+    \end{tabular}
+    \label{tab:repositorios}
+\end{table}

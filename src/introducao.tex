@@ -16,16 +16,7 @@ A programação de fluxo de dados permite, por natureza, um alto grau de paralel
 
 O alto paralelismo natural da PFD faz com que, na área de edição de imagem, o fluxo de edição se torne descentralizado e não linear. Em programas tradicionais de edição de imagem, o usuário segue uma ordem linear de operações, fazendo com que cada mudança dependa da anterior. Com a implementação de um modelo Dataflow em um programa de edição de imagem, esse foco muda e se torna descentralizado, permitindo que o usuário edite uma imagem de diversas maneiras, sem depender de uma sequência rígida.
 
-Programas desenvolvidos sob este paradigma são estruturados por meio de grupos de nodes (ou blocos), interligados por conexões que representam o fluxo de dados. Cada node possui portas de entrada e/ou saída, que pode exercer diferentes funções dentro do sistema, demonstrado na figura ~\ref{fig:dataflow} De forma geral, esses nós são classificados em três categorias principais, sendo elas: blocos de entrada, blocos de processamento e blocos de saída. As informações percorrem o programa seguindo essas conexões, introduzidos pelos blocos de entrada, sendo transformados conforme passam pelos blocos processadores, até atingirem os destinos finais nos blocos de saída, que coletam os resultados \cite{dataflow}.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=1\textwidth]{imagens/dfpex.png}
-    \caption{
-    Um simples programa (a) e o seu equivalente em no formato Dataflow (b)}
-    \label{fig:dataflow}
-    \cite{dataflow}
-\end{figure}
+Programas desenvolvidos sob este paradigma são estruturados por meio de grupos de nodes (ou blocos), interligados por conexões que representam o fluxo de dados. Cada node possui portas de entrada e/ou saída, que pode exercer diferentes funções dentro do sistema. De forma geral, esses nós são classificados em três categorias principais, sendo elas: blocos de entrada, blocos de processamento e blocos de saída. As informações percorrem o programa seguindo essas conexões, introduzidos pelos blocos de entrada, sendo transformados conforme passam pelos blocos processadores, até atingirem os destinos finais nos blocos de saída, que coletam os resultados \cite{dataflow}.
 
 \section{Justificativa}
 
@@ -41,7 +32,7 @@ Na presente seção serão expostos os objetivos do trabalho, tanto gerais quant
 
 \subsection{Objetivos Gerais}
 
-O objetivo principal deste projeto é a criação de um aplicativo de edição de foto baseado em nodes, com a sua principal finalidade sendo a implementação do diagrama de fluxo de dados, de uma forma visual, de forma que o usuário possa editar fotos e/ou imagens de uma forma disruptiva e não linear.
+O objetivo principal deste projeto é a criação de um aplicativo de edição de foto baseado em nodes, com a sua principal finalidade sendo a implementação do diagrama de fluxo de dados, de uma forma visual, de forma que o usuário possa editar fotos e/ou imagens de uma forma não linear.
 
 Diferindo da tradicional forma de edição fotográfica sendo, uma forma linear de editar as imagens, com instruções uma após a outra, assim limitando o usuário a seguir um padrão ao invés de dar a liberdade para que o usuário possa, da forma que preferir, editar a imagem.
 
@@ -54,8 +45,9 @@ Diferindo da tradicional forma de edição fotográfica sendo, uma forma linear 
     \item Implementar \textit{nodes} funcionais capazes de realizar mudanças nas imagens, atendendo os parâmetros e requisitos definidos pelo usuário, independentemente da posição ou ordem no grafo.
     \item Implementar \textit{nodes} capazes de criar Shaders, tanto em versões de código, feitos pelo usuário, quanto nodes de código já previamente feitos pelo programa.
     \item Implementar um servidor websocket para sessões colaborativas, em que dois ou mais usuários possam editar a mesma imagem ao mesmo tempo.
+    \item Implementar diferentes versões do mesmo aplicativo, para fins de comparação de desempenho e usabilidade, sendo elas: duas versões desktop e uma versão web.
 \end{itemize}
 
 \section{Organização dos Capítulos}
 
-Na presente seção será apresentada a organização deste trabalho, divido em seções, iniciando pela introdução, seguida pela fundamentação teórica, trabalhos relacionados, desenvolvimento e conclusão do trabalho.
+Na presente seção será apresentada a organização deste trabalho, dividido em seções. Iniciando pela introdução, onde este capítulo apresenta o tema, a justificativa e os objetivos do trabalho. Em seguida pela fundamentação teórica, que aborda os conceitos e tecnologias relevantes para o desenvolvimento do aplicativo. Posteriormente, são discutidos os trabalhos relacionados, que analisam soluções similares existentes no mercado. O desenvolvimento do trabalho é detalhado na seção de metodologia, criação do aplicativo, que inclui o planejamento e implementação do aplicativo. Finalmente, a conclusão do trabalho apresenta os resultados alcançados, as contribuições do estudo e sugestões para trabalhos futuros.
